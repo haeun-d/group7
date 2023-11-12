@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>
+    회원가입
+</h1>
+<form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div>
+        <label for="{{ form.username.id_for_label }}">이름 :</label>
+        <div>{{ form.username }}</div>
+        {% if form.username.errors %}
+            <p class="error">{{ form.username.errors.as_text }}</p>
+        {% endif %}
+        <br />
+
+        <label for="{{ form.nickname.id_for_label }}">닉네임 :</label>
+        <div>{{ form.nickname }}</div>
+        {% if form.nickname.errors %}
+            <p class="error">{{ form.nickname.errors.as_text }}</p>
+        {% endif %}
+        <br />
+        <label for="{{ form.email.id_for_label }}">메일 :</label>
+        <div>{{ form.email }}</div>
+        {% if form.email.errors %}
+            <p class="error">{{ form.email.errors.as_text }}</p>
+        {% endif %}
+        <br />
+        <label for="{{ form.password1.id_for_label }}">비밀번호 :</label>
+        <div>{{ form.password1 }}</div>
+        {% if form.password1.errors %}
+            <p class="error">{{ form.password1.errors.as_text }}</p>
+        {% endif %}
+        <br />
+        <label for="{{ form.password2.id_for_label }}">비밀번호 확인 :</label>
+        <div>{{ form.password2 }}</div>
+        {% if form.password2.errors %}
+            <p class="error">{{ form.password2.errors.as_text }}</p>
+        {% endif %}
+        <br />
+    </div>
+    <div>
+        <input type="submit">
+    </div>
+</form>
+{% endblock %}
