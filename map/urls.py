@@ -1,6 +1,8 @@
 from django.urls import path
 from .views import *
 
+app_name='map'
+
 urlpatterns=[
-    path('',index, name='index'),
+    path('',map, name='map'),
 ]
