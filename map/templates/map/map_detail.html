@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}상세설명{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid card my-5">
+  <div class="my-3map_detail.html">{{map.title }}</div>
+  <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+
+      {% for photo in map.map_image.all %}
+    <div class="carousel-item active" data-bs-interval="3000">
+        <img width=800 height=1000 class="card-img-top" src="{{ photo.image.url }}" class="d-block w-100" alt="Benefit Image">
+    </div>
+      {% endfor %}
+
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+  <div class="card-body">
+    <h1 class="card-title">{{map.place}}</h1>
+    <p class="card-text">{{map.introduction}}</p>
+    <p class="card-text">{{map.detail}}</p>
+    <p class="card-text">{{map.deadline}}</p>
+
+    <p class="card-text"><small class="text-muted">{{map.inquiry}}</small></p>
+  </div>
+</div>
+
+
+
+{% endblock %}

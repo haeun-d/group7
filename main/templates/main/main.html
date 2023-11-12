@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}알차고{% endblock %}
+
+{% block content %}
+index
+
+{% if request.user.is_authenticated %}
+반갑습니다 {{request.user.username}}님<br>
+{% else %}
+로그인이 필요합니다
+{% endif %}
+
+{% endblock %}

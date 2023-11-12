@@ -14,7 +14,7 @@ def signup_view(request):
     if form.is_valid():
         print(f"Redirecting to: {redirect('index').url}")  # 추가된 부분
         instance = form.save()
-        return redirect('index')
+        return redirect('main')
     else:
         print(form.errors)
         return render(request, 'accounts/signup.html', {'form': form})
@@ -27,11 +27,11 @@ def login_view(request):
     form=AuthenticationForm(request, data=request.POST)
     if form.is_valid():
         login(request, form.user_cache)
-        return redirect('index')
+        return redirect('main')
     return render(request, 'accounts/login.html',{'form':form})
 
 def logout_view(request):
     if request.user.is_authenticated:
         logout(request)
 
-    return redirect('index')
+    return redirect('main')
