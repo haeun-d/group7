@@ -13,7 +13,7 @@
         {% endif %}
         <br />
 
-        <label for="{{ form.password.id_for_label }}">닉네임 :</label>
+        <label for="{{ form.password.id_for_label }}">비밀번호 :</label>
         <div>{{ form.password }}</div>
         {% if form.password.errors %}
             <p class="error">{{ form.password.errors.as_text }}</p>

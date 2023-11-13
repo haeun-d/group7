@@ -12,7 +12,6 @@ def signup_view(request):
 
     form = SignUpForm(request.POST)
     if form.is_valid():
-        print(f"Redirecting to: {redirect('index').url}")  # 추가된 부분
         instance = form.save()
         return redirect('main')
     else:
