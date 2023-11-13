@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}로그인{% endblock %}
+
+{% block content %}
+<form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div>
+        <label for="{{ form.username.id_for_label }}">이름 :</label>
+        <div>{{ form.username }}</div>
+        {% if form.username.errors %}
+            <p class="error">{{ form.username.errors.as_text }}</p>
+        {% endif %}
+        <br />
+
+        <label for="{{ form.password.id_for_label }}">닉네임 :</label>
+        <div>{{ form.password }}</div>
+        {% if form.password.errors %}
+            <p class="error">{{ form.password.errors.as_text }}</p>
+        {% endif %}
+        <br />
+    </div>
+    <div>
+        <button type="submit">전송</button>
+    </div>
+</form>
+{% endblock %}
