@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'trade',
     'users',
     'main',
+    'consumption',
 ]
 
 MIDDLEWARE = [

@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<link href="{% static 'bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'bootstrap.min.css' %}" rel="stylesheet" type="text/css">
 
     <style>
         body {
@@ -12,6 +12,7 @@
     }
 
   </style>
+    
   <title>{% block title %}{% endblock %}</title>
 
 </head>
@@ -47,7 +48,7 @@
                     </li>
                     <!--금융관리-->
                     <li class="nav-item">
-                        <a class="nav-link" href="">금융관리</a>
+                        <a class="nav-link" href="{% url 'consumption:main-consumption' %}">금융관리</a>
                     </li>
                     <!--중고거래-->
                     <li class="nav-item">
@@ -126,7 +127,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-
-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
 </body>
 </html>

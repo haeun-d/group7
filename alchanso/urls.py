@@ -26,5 +26,6 @@ urlpatterns = [
     path('',include('main.urls')),
     path('map/',include('map.urls',namespace='map')),
     path('community/',include('community.urls',namespace='community')),
+    path('consumption',include('consumption.urls',namespace='consumption')),
     path('accounts/',include('accounts.urls',namespace='accounts')),
 ]+ static(settings.MEDIA_URL,  document_root=settings.MEDIA_ROOT)
