@@ -6,17 +6,22 @@
 <form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     <div>
-        <label for="{{ form.username.id_for_label }}">이름 :</label>
+        <label for="{{ form.username.id_for_label }}">아이디 :</label>
         <div>{{ form.username }}</div>
         {% if form.username.errors %}
             <p class="error">{{ form.username.errors.as_text }}</p>
         {% endif %}
         <br />
-
+        
         <label for="{{ form.nickname.id_for_label }}">닉네임 :</label>
         <div>{{ form.nickname }}</div>
         {% if form.nickname.errors %}
             <p class="error">{{ form.nickname.errors.as_text }}</p>
+        {% endif %}
+        <br />
+        <div>{{ form.profile }}</div>
+        {% if form.profile.errors %}
+            <p class="error">{{ form.profile.errors.as_text }}</p>
         {% endif %}
         <br />
         <label for="{{ form.email.id_for_label }}">메일 :</label>

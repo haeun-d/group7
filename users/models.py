@@ -21,9 +21,16 @@ class CustomUserManager(BaseUserManager):
 
 class User(AbstractUser):
     email = models.EmailField(max_length=30, unique=True, null=False, blank=False)
-    nickname = models.CharField(max_length=20, default='덕우')
-
+    nickname = models.CharField(max_length=20)
+    profile=models.ImageField(upload_to="profile/", null=True)
     objects = CustomUserManager()
-
     def __str__(self):
         return self.username
+    
+    
+class Follow(models.Model):
+    follower = models.ForeignKey(User, related_name='following', on_delete=models.CASCADE)
+    following = models.ForeignKey(User, related_name='followers', on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ('follower', 'following')

@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+
+{% block title %}여기에 제목을 써주세요{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+<a href="{% url 'consumption:friend' %}"><button type="button" class="btn-close mb-5" aria-label="Close"></button></a>
+
+
+<div class="container my-5">
+    <form method="POST" actin="" class="d-flex">
+        {% csrf_token %}
+        <input  name="search" class="form-control me-2" type="search" placeholder="아이디를 검색하세요" aria-label="Search">
+        <button class="btn btn-outline-primary" type="submit">Search</button>
+      </form>
+</div>
+
+<div>
+    {% for u in users %}
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-2">
+                    {% if u.profile %}
+                    <img style="border-radius: 100%;" width="100px" height="100px" src="{{u.profile.url}}">
+                    {% else %}
+                    <img style="border-radius: 100%;" width="100px" height="100px" src="/media/user/Graham.png">
+                    {% endif %}
+                </div>
+                <div class="col-8">
+                    <p>
+                        {{u.username}}
+                    </p>
+                </div>
+                <div class="col-2">
+                    {% if u.username in following %}
+                    <a href="{% url 'consumption:unfollow' u.username %}"><button type="button" class="btn btn-lg btn-secondary">언팔로우</button></a>
+                    {% elif request.user == u %}
+                    <button type="button" class="btn btn-lg btn-secondary">본인</button>
+                    {% else %}
+                    <a href="{% url 'consumption:follow' u.username %}"><button type="button" class="btn btn-lg btn-secondary">팔로우</button></a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+      </div>
+            
+    {% endfor %}
+    
+</div>
+</div>
+{% endblock %}
