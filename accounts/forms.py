@@ -4,6 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 
 
 class SignUpForm(UserCreationForm):
+    profile = forms.ImageField(required=False)
     class Meta():
         model=get_user_model()
-        fields=['username', 'email', 'nickname']
+        fields=['username', 'email', 'nickname', 'profile']

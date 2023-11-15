@@ -10,9 +10,10 @@ def signup_view(request):
         context = {'form': form}
         return render(request, 'accounts/signup.html', context)
 
-    form = SignUpForm(request.POST)
+    form = SignUpForm(request.POST, request.FILES)
     if form.is_valid():
-        instance = form.save()
+        user = form.save()
+ 
         return redirect('main')
     else:
         print(form.errors)

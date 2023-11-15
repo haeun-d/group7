@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+
+{% block title %}여기에 제목을 써주세요{% endblock %}
+
+{% block content %}
+{% include 'consumption/consumption_nav.html' %}
+<div style=" position: fixed; bottom: 0; margin-left: 700px;">
+    <a href="{% url 'consumption:search-friend' %}">
+        <button  type="button" class="btn btn-lg btn-primary m-5">아이디로 친구추가</button>
+    </a>
+</div>
+
+
+<div class="container my-5">
+    친구 목록
+    {% for f in following %}
+    <div class="card my-5">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-2">
+                    {% if f.profile %}
+                    <img style="border-radius: 100%;" width="100px" height="100px" src="{{f.profile.url}}">
+                    {% else %}
+                    <img style="border-radius: 100%;" width="100px" height="100px" src="/media/user/Graham.png">
+                    {% endif %}
+                </div>
+                <div class="col-7">
+                    <p>
+                        {{f.username}}
+                    </p>
+                </div>
+                <div class="col-3">
+                    <a href="{% url 'consumption:my-consumption' f.username %}"><button type="button" class="btn btn-lg btn-secondary">친구 보러가기</button></a>
+                </div>
+            </div>
+        </div>
+        
+      </div>
+      {% empty %}
+      팔로잉 없음    
+    {% endfor %}
+    
+</div>
+{% endblock %}

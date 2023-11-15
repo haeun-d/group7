@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}알차고{% endblock %}
 
 {% block content %}
@@ -10,5 +10,9 @@ index
 {% else %}
 로그인이 필요합니다
 {% endif %}
-
+{% if request.user.profile %}
+<img src="{{request.user.profile.url}}">
+{% else %}
+<img src="/media/user/Graham.png">
+{% endif %}
 {% endblock %}
