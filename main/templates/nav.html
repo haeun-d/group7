@@ -10,7 +10,7 @@
                 <!--로그인-->
                 {% if request.user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'accounts:logout' %}">로그아웃</a>
+                    <a class="nav-link" href="{% url 'accounts:mypage' %}">마이페이지</a>
                 </li>
                  <!-- 커뮤니티 -->
                  <li class="nav-item">

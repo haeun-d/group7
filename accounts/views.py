@@ -35,3 +35,20 @@ def logout_view(request):
         logout(request)
 
     return redirect('main')
+
+def mypage(request):
+    return render(request, 'accounts/mypage.html')
+
+def update_userinfo(request):
+    if request.method=="POST":
+        nickname=request.POST.get('nickname')
+        email=request.POST.get('email')
+        new_profile=request.FILES.get('profile')
+        if new_profile:
+            request.user.profile.delete()
+            request.user.profile=new_profile
+        request.user.nickname=nickname
+        request.user.email=email
+        request.user.save()
+        return redirect('accounts:mypage')
+    return render(request, 'accounts/update_userinfo.html')
