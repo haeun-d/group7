@@ -14,18 +14,20 @@
 </div>
 
 <div class="row my-5">
-    <div class="col-6">
-        {{find_y}}년 {{find_m}}월 {{find_d}}일
+    <div class="col-8">
+        <h1>{{find_y}}년 {{find_m}}월 {{find_d}}일</h1>
     </div>
-    <div class="col-6">
-        
+    <div class="col-4">
+        <a href="{% url 'consumption:calender' %}">
+            <button  type="button" class="btn btn-primary">기록하기</button>
+        </a>
     </div>
 </div>
 <form action="" method="POST">
     {% csrf_token %}
-<div class="row  mt-5">
+<div class="row">
     <div class="col-3">
-        <div class="input-group my-3">
+        <div class="input-group ">
             <select name="year" class="form-select" aria-label="Default select example">
         
                 {% for i in year %}
@@ -33,11 +35,10 @@
                 {% endfor %}
                 
             </select>
-            <span class="input-group-text"> 년 </span>
             </div>
     </div>
     <div class="col-3">
-        <div class="input-group my-3">
+        <div class="input-group">
             
             <select name="month" name="category"  class="form-select" aria-label="Default select example">
         
@@ -49,11 +50,10 @@
             
                 
             </select>
-            <span  class="input-group-text"> 월 </span>
             </div>
     </div>
     <div class="col-3">
-        <div class="input-group my-3">
+        <div class="input-group">
             
             <select name="date"  class="form-select" aria-label="Default select example">
         
@@ -62,17 +62,16 @@
                 {% endfor %}
                 
             </select>
-            <span class="input-group-text"> 일 </span>
             </div>
     </div>
     <div class="col-3">
-        <button type="submit" class="btn btn-lg btn-secondary">검색</button>
+        <button type="submit" class="btn  btn-secondary">검색</button>
     </div>
 </div>
 </form>
 
 {% for c in category %}
-<button type="button" style="background-color:cadetblue; margin-bottom:10px" class="btn btn-secondary btn-lg mt-5" disabled>{{c}}</button>
+<button type="button" style="background-color:cadetblue; margin-bottom:10px" class="btn btn-secondary  mt-5" disabled>{{c}}</button>
 
 <div class="row">
     

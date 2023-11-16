@@ -1,50 +1,63 @@
 {% extends 'base.html' %}
+{% load widget_tweaks %}
 
 {% block title %}회원가입{% endblock %}
 
 {% block content %}
+<div style="text-align: center;">
 <form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-    <div>
-        <label for="{{ form.username.id_for_label }}">아이디 :</label>
-        <div>{{ form.username }}</div>
+    <div class="input-group my-3">
+        <span  class="input-group-text"> 아이디 : </span>
+        {{ form.username|add_class:"form-control" }}
         {% if form.username.errors %}
             <p class="error">{{ form.username.errors.as_text }}</p>
         {% endif %}
-        <br />
-        
-        <label for="{{ form.nickname.id_for_label }}">닉네임 :</label>
-        <div>{{ form.nickname }}</div>
+    </div>
+      <div class="input-group my-3">
+        <span  class="input-group-text"> 닉네임 : </span>
+        {{ form.nickname|add_class:"form-control" }}
         {% if form.nickname.errors %}
             <p class="error">{{ form.nickname.errors.as_text }}</p>
         {% endif %}
-        <br />
-        <div>{{ form.profile }}</div>
+      </div>
+      <div class="input-group my-3">
+        <span  class="input-group-text"> 프로필 사진 : </span>
+        {{ form.profile|add_class:"form-control" }}
         {% if form.profile.errors %}
             <p class="error">{{ form.profile.errors.as_text }}</p>
         {% endif %}
-        <br />
-        <label for="{{ form.email.id_for_label }}">메일 :</label>
-        <div>{{ form.email }}</div>
+      </div>
+      <div class="input-group my-3">
+        <span  class="input-group-text"> 이메일 : </span>
+        {{ form.email|add_class:"form-control" }}
         {% if form.email.errors %}
             <p class="error">{{ form.email.errors.as_text }}</p>
         {% endif %}
-        <br />
-        <label for="{{ form.password1.id_for_label }}">비밀번호 :</label>
-        <div>{{ form.password1 }}</div>
+      </div>
+      <div class="input-group my-3">
+        <span  class="input-group-text"> 비밀번호 :  </span>
+        {{ form.password1|add_class:"form-control" }}
         {% if form.password1.errors %}
             <p class="error">{{ form.password1.errors.as_text }}</p>
         {% endif %}
-        <br />
-        <label for="{{ form.password2.id_for_label }}">비밀번호 확인 :</label>
-        <div>{{ form.password2 }}</div>
+      </div>
+      <div class="input-group my-3">
+        <span  class="input-group-text"> 비밀번호 확인 : </span>
+        {{ form.password2|add_class:"form-control" }}
         {% if form.password2.errors %}
             <p class="error">{{ form.password2.errors.as_text }}</p>
         {% endif %}
-        <br />
+      </div>
+
     </div>
-    <div>
-        <input type="submit">
+    <div class="my-5" style="text-align: center;">
+        <button type="submit" class="btn btn-lg btn-primary">회원가입</button>
+    </div>
+    <div style="text-align: center;">
+        이미 계정이 있으신가요?<br>
+        <a href="{% url 'accounts:login' %}">로그인</a>하러가기
     </div>
 </form>
+</div>
 {% endblock %}

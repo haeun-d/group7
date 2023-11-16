@@ -5,33 +5,30 @@
 
 {% block content %}
 {% include 'consumption/consumption_nav.html' %}
-<div style=" position: fixed; bottom: 0; margin-left: 700px;">
+
+<div class="container">
+    친구 목록 
     <a href="{% url 'consumption:search-friend' %}">
-        <button  type="button" class="btn btn-lg btn-primary m-5">아이디로 친구추가</button>
+        <button  type="button" class="btn btn-primary m-5">아이디로 친구추가</button>
     </a>
-</div>
-
-
-<div class="container my-5">
-    친구 목록
     {% for f in following %}
-    <div class="card my-5">
+    <div class="card my-2">
         <div class="card-body">
             <div class="row">
-                <div class="col-2">
+                <div class="col-4">
                     {% if f.profile %}
                     <img style="border-radius: 100%;" width="100px" height="100px" src="{{f.profile.url}}">
                     {% else %}
                     <img style="border-radius: 100%;" width="100px" height="100px" src="/media/user/Graham.png">
                     {% endif %}
                 </div>
-                <div class="col-7">
+                <div class="col-5">
                     <p>
                         {{f.username}}
                     </p>
                 </div>
-                <div class="col-3">
-                    <a href="{% url 'consumption:my-consumption' f.username %}"><button type="button" class="btn btn-lg btn-secondary">친구 보러가기</button></a>
+                <div class="col-3 my-3">
+                    <a href="{% url 'consumption:my-consumption' f.username %}"><button type="button" class="btn btn-secondary">보러가기</button></a>
                 </div>
             </div>
         </div>

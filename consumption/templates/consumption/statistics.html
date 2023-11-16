@@ -12,16 +12,24 @@
   <!-- 차트 링크 -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
   <style>
-  body {
-    width:1000px;
-    margin: 0 auto; 
-background-color: #f8f9fa;
-
+    body {
+    width: 100%;
+    background-color: #f8f9fa;
+    font-size: 20px;
 }
-</style>
+
+.container {
+    max-width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 0;
+    padding-left: 0;
+}
+  </style>
 </head>
 
 <body>
+    <div class="container-xl">
 
     <div id="common_category" style="display:none">
         {{c}}
@@ -34,7 +42,7 @@ background-color: #f8f9fa;
     </div>
 
 
-    <div style=" position: fixed; bottom: 0; margin-left: 700px;">
+    <div style=" position: fixed; bottom: 0; margin-left: 100px;">
         <a href="{% url 'consumption:calender' %}">
             <button  type="button" class="btn btn-lg btn-primary m-5">금융 기록하기</button>
         </a>
@@ -45,10 +53,10 @@ background-color: #f8f9fa;
     <form action="" method="POST">
         {% csrf_token %}
     <div class="container row  mt-5">
-        <div class="col-6">
+        <div>
             <h1>{{find_y}}년 {{find_m}}월의 통계</h1>
         </div>
-        <div class="col-2">
+        <div class="col-5">
             <div class="input-group my-3">
                 <select name="year" class="form-select" aria-label="Default select example">
                     {% for i in year %}
@@ -59,7 +67,7 @@ background-color: #f8f9fa;
                 <span class="input-group-text"> 년 </span>
                 </div>
         </div>
-        <div class="col-2">
+        <div class="col-5">
             <div class="input-group my-3">
                 
                 <select name="month" name="category"  class="form-select" aria-label="Default select example">
@@ -73,8 +81,8 @@ background-color: #f8f9fa;
                 <span  class="input-group-text"> 월 </span>
                 </div>
         </div>
-        <div class="col-2">
-            <button type="submit" class="btn btn-lg btn-secondary">검색</button>
+        <div class="col-1">
+            <button type="submit" class="btn btn-secondary my-3">검색</button>
         </div>
     </div>
     </form>
@@ -115,6 +123,7 @@ background-color: #f8f9fa;
         </div>
       </div>
     </div>
+</div>
   <!-- 부트스트랩 -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

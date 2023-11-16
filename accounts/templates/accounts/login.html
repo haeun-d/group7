@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load widget_tweaks %}
 
 {% block title %}로그인{% endblock %}
 
@@ -6,22 +7,28 @@
 <form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     <div>
-        <label for="{{ form.username.id_for_label }}">아이디 :</label>
-        <div>{{ form.username }}</div>
-        {% if form.username.errors %}
-            <p class="error">{{ form.username.errors.as_text }}</p>
-        {% endif %}
-        <br />
+        <div class="input-group my-3">
+            <span  class="input-group-text"> 아이디 : </span>
+            {{ form.username|add_class:"form-control" }}
+            {% if form.username.errors %}
+                <p class="error">{{ form.username.errors.as_text }}</p>
+            {% endif %}
+        </div>
 
-        <label for="{{ form.password.id_for_label }}">비밀번호 :</label>
-        <div>{{ form.password }}</div>
-        {% if form.password.errors %}
-            <p class="error">{{ form.password.errors.as_text }}</p>
-        {% endif %}
-        <br />
+        <div class="input-group my-3">
+            <span  class="input-group-text"> 비밀번호 :  </span>
+            {{ form.password|add_class:"form-control" }}
+            {% if form.password.errors %}
+                <p class="error">{{ form.password.errors.as_text }}</p>
+            {% endif %}
+          </div>
     </div>
-    <div>
-        <button type="submit">전송</button>
+    <div class="my-5" style="text-align: center;">
+        <button type="submit" class="btn btn-lg btn-primary">로그인</button>
+    </div>
+    <div style="text-align: center;">
+        계정이 없으신가요?<br>
+        <a href="{% url 'accounts:signup' %}">회원가입</a>하러가기
     </div>
 </form>
 {% endblock %}
