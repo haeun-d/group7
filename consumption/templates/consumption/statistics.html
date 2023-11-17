@@ -41,18 +41,17 @@
         {{value}}
     </div>
 
-
-    <div style=" position: fixed; bottom: 0; margin-left: 100px;">
-        <a href="{% url 'consumption:calender' %}">
-            <button  type="button" class="btn btn-lg btn-primary m-5">금융 기록하기</button>
-        </a>
-    </div>
     
     {% include 'nav.html' %}
     {% include 'consumption/consumption_nav.html' %}
     <form action="" method="POST">
         {% csrf_token %}
     <div class="container row  mt-5">
+        <div style=" position: fixed; bottom: 0; margin-left: 100px;">
+            <a href="{% url 'consumption:calender' %}">
+                <button  type="button" class="btn btn-lg btn-primary m-5">금융 기록하기</button>
+            </a>
+        </div>
         <div>
             <h1>{{find_y}}년 {{find_m}}월의 통계</h1>
         </div>

@@ -5,6 +5,8 @@
 {% block content %}
 
 <div class="container-fluid card my-5">
+  <a href="{% url 'map:map-benefit'%}"><button type="button" class="btn-close my-3" aria-label="Close"></button></a>
+
   <div class="my-3map_detail.html">{{map.title }}</div>
   <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
