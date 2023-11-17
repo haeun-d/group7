@@ -14,24 +14,31 @@
 </div>
 
 <div class="row my-5">
+    
     <div class="col-8">
         <h1>{{find_y}}년 {{find_m}}월 {{find_d}}일</h1>
     </div>
     <div class="col-4">
+        {% if username == request.user.username %}
         <a href="{% url 'consumption:calender' %}">
             <button  type="button" class="btn btn-primary">기록하기</button>
         </a>
+        {% endif %}
     </div>
 </div>
 <form action="" method="POST">
     {% csrf_token %}
 <div class="row">
-    <div class="col-3">
+    <div class="col-4">
         <div class="input-group ">
             <select name="year" class="form-select" aria-label="Default select example">
         
                 {% for i in year %}
+                {% if i == find_y %}
+                <option selected value="{{ i }}">{{ i }}</option>
+                {% else %}
                 <option value="{{ i }}">{{ i }}</option>
+                {% endif %}
                 {% endfor %}
                 
             </select>
@@ -39,11 +46,10 @@
     </div>
     <div class="col-3">
         <div class="input-group">
-            
             <select name="month" name="category"  class="form-select" aria-label="Default select example">
-        
+            
             {% for i in month %}
-                <option value="{{ i }}">{{ i }}</option>
+            <option selected value ="{{ i }}">{{ i }}</option>
             {% endfor %}
             
             
@@ -58,14 +64,14 @@
             <select name="date"  class="form-select" aria-label="Default select example">
         
                 {% for i in date %}
-                <option value="{{ i }}">{{ i }}</option>
+                <option selected value="{{ i }}">{{ i }}</option>
                 {% endfor %}
                 
             </select>
             </div>
     </div>
-    <div class="col-3">
-        <button type="submit" class="btn  btn-secondary">검색</button>
+    <div class="col-2">
+        <button style="font-size:10px" type="submit" class="btn  btn-secondary">검색</button>
     </div>
 </div>
 </form>
@@ -79,7 +85,7 @@
         {% if username == request.user.username or r.share %}
         {% if r.category == c %}
     <div class="col-sm-6">
-        <div class="card">
+        <div class="card mb-3">
             <div class="card-body">
                 <div class="row"> 
                     <div class="col-6">

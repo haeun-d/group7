@@ -36,8 +36,7 @@ def common_category(a,b,c,d,e,f):
 def main_consumption(request, username):
     request.session['username'] = username
     user = User.objects.get(username=username)
-    print(user.like_user.all())
-    
+    print(user.like_user.all())   
 
     if(request.user==user):
         me=True
@@ -45,15 +44,20 @@ def main_consumption(request, username):
         me=False
 
     if request.method=="GET":
-        today=datetime.today().strftime("%m/%d/%Y")
-        year, month, date=parseTime(today)
+        try:
+            year=request.session['year']
+            month=request.session['month']
+            date=request.session['date']
+        except:
+            today=datetime.today().strftime("%m/%d/%Y")
+            year, month, date=parseTime(today)
     else:
         year=request.POST.get('year')
         month=request.POST.get('month')
         date=request.POST.get('date')
-
-    print(username)
-    print(request.user.username)
+        request.session['year']=year
+        request.session['month']=month
+        request.session['date']=date
 
     records=Record.objects.filter(writer=user, year=year, month=month, date=date).order_by('category')
     category=["음식","생필품","여가","교통","학습","기타"]
