@@ -5,11 +5,17 @@
 
 {% block content %}
 {% include 'consumption/consumption_nav.html' %}
+<script>
+    let nav=document.getElementById("friend");
+    nav.style.fontSize="30px";
+    // nav.style.color=blue;
+    nav.style.color = 'steelblue';
+</script>
 
 <div class="container">
-    친구 목록 
+    친구 목록
     <a href="{% url 'consumption:search-friend' %}">
-        <button  type="button" class="btn btn-primary m-5">아이디로 친구추가</button>
+        <button  type="button" class="btn btn-primary m-3">아이디로 친구추가</button>
     </a>
     {% for f in following %}
     <div class="card my-2">
@@ -35,7 +41,8 @@
         
       </div>
       {% empty %}
-      팔로잉 없음    
+      <div></div>
+      현재 팔로잉 없음    
     {% endfor %}
     
 </div>

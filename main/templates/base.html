@@ -7,6 +7,11 @@
     <link href="{% static 'bootstrap.min.css' %}" rel="stylesheet" type="text/css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-
 4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+<!-- Font Awesome 5 -->
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
+/>
 <style>
     body {
         width: 100%;
@@ -29,19 +34,14 @@
 </head>
 
 <body>
+    
 
     <div class="container-xl">
         {% include 'nav.html' %}
 {% block content %}
 {% endblock %}
         </div>
-  <!-- 푸터 영역 -->
-  <footer class="row my-5" style="padding-top:200px">
-    <div class="col-md-12 text-center">
-      <p style="font-size:15px">&copy; 2023 internet-programming team-7<br>
-        All Right Reserved.</p>
-    </div>
-  </footer>
+        {% include 'footer.html' %}
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
         crossorigin="anonymous"></script>

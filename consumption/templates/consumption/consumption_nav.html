@@ -1,4 +1,13 @@
-<a href="{% url 'consumption:my-consumption' request.user.username %}"><button type="button" class="btn btn-lg btn-primary" >my 금융</button></a>
-<a href="{% url 'consumption:friend' %}"><button type="button" class="btn btn-lg btn-primary" >친구</button></a>
-<a href="{% url 'consumption:statistic' %}"><button type="button"  class="btn btn-secondary btn-lg" >통계</button></a>
-<div class="div-container"></div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="navbar-nav mx-2">
+        <a class="nav-link" href="{% url 'consumption:my-consumption' request.user.username %}" style="font-size: 16px;" id="bank">금융</a>
+    </div>
+
+    <div class="navbar-nav mx-2">
+        <a class="nav-link" href="{% url 'consumption:friend' %}" style="font-size: 16px;" id="friend">친구</a>
+    </div>
+
+    <div class="navbar-nav mx-2">
+        <a class="nav-link" href="{% url 'consumption:statistic' %}" style="font-size: 16px;" id="nav_sta">통계</a>
+    </div>
+</nav>
