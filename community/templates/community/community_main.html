@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-
+4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+    <style>
+    body {
+        width: 100%;
+        background-color: #f8f9fa;
+        font-size: 20px;
+    }
+
+    .card {
+        max-width: 100%;
+        margin-right: auto;
+        margin-left: auto;
+        padding-right: 0;
+        padding-left: 0;
+    }
+</style>
+
+</head>
+<body>
+
+{% block title %}Welcome to the Community{% endblock %}
+
+{% block content %}
+<div class="card" style="width: 30rem;">
+  <img src="{% static 'images/food.png' %}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Food</h5>
+    <p class="card-text">점심시간 혼밥하기 싫은 사람, 배달비 아끼고 싶은 사람 여기로 들어와서 밥 같이 먹어요</p>
+    <a href="{% url 'community:food' %}" class="btn btn-primary">Go Website</a>
+  </div>
+</div>
+<div class="card" style="width: 30rem;">
+  <img src="{% static 'images/delivery.png' %}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Delivery</h5>
+    <p class="card-text">혼자 사는데 대용량 사기 부담스러웠던 사람들, 여기 들어와서 함께 구매해요</p>
+    <a href="{% url 'community:delivery' %}" class="btn btn-primary">Go Website</a>
+  </div>
+</div>
+{% endblock %}
+
+
+</body>
+</html>
