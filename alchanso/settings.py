@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     'users',
     'main',
     'consumption',
-
     'widget_tweaks',
 ]
 
