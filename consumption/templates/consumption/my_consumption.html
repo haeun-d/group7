@@ -1,133 +1,137 @@
 {% extends 'base.html' %}
 
-
 {% block title %}금융관리{% endblock %}
 
 {% block content %}
-
-{% include 'consumption/consumption_nav.html' %}
-
-<div style=" position: fixed; bottom: 0; margin-left: 700px;">
-    <a href="{% url 'consumption:calender' %}">
-        <button  type="button" class="btn btn-lg btn-primary m-5">금융 기록하기</button>
-    </a>
-</div>
-
-<div class="row my-5">
-    
-    <div class="col-8">
-        <h1>{{find_y}}년 {{find_m}}월 {{find_d}}일</h1>
-    </div>
-    <div class="col-4">
-        {% if username == request.user.username %}
-        <a href="{% url 'consumption:calender' %}">
-            <button  type="button" class="btn btn-primary">기록하기</button>
+    {% if username != request.user.username %}
+        <a href="{% url 'consumption:friend' %}">
+            <button type="button" class="btn-close" aria-label="Close"></button>
         </a>
-        {% endif %}
+    {% else %}
+        {% include 'consumption/consumption_nav.html' %}
+        <script>
+            let nav=document.getElementById("bank");
+            nav.style.fontSize="30px";
+            // nav.style.color=blue;
+            nav.style.color = 'steelblue';
+        </script>
+    {% endif %}
+
+    <div style="position: fixed; bottom: 0; margin-left: 700px;">
+        <a href="{% url 'consumption:calender' %}">
+            <button type="button" class="btn btn-lg btn-primary m-5">금융 기록하기</button>
+        </a>
     </div>
-</div>
-<form action="" method="POST">
-    {% csrf_token %}
-<div class="row">
-    <div class="col-4">
-        <div class="input-group ">
-            <select name="year" class="form-select" aria-label="Default select example">
-        
-                {% for i in year %}
-                {% if i == find_y %}
-                <option selected value="{{ i }}">{{ i }}</option>
-                {% else %}
-                <option value="{{ i }}">{{ i }}</option>
+
+    <div class="row my-4">
+        <div class="col-8">
+            <h1>{{ find_y }}년 {{ find_m }}월 {{ find_d }}일</h1>
+        </div>
+        <div class="col-4">
+            {% if username == request.user.username %}
+                <a href="{% url 'consumption:calender' %}">
+                    <button type="button" class="btn btn-primary">기록하기</button>
+                </a>
+            {% endif %}
+        </div>
+    </div>
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-4">
+                <div class="input-group">
+                    <select name="year" class="form-select" aria-label="Default select example">
+                        {% for i in year %}
+                            {% if i == find_y %}
+                                <option selected value="{{ i }}">{{ i }}</option>
+                            {% else %}
+                                <option value="{{ i }}">{{ i }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="input-group">
+                    <select name="month" name="category" class="form-select" aria-label="Default select example">
+                        {% for i in month %}
+                            <option selected value="{{ i }}">{{ i }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="input-group">
+                    <select name="date" class="form-select" aria-label="Default select example">
+                        {% for i in date %}
+                            <option selected value="{{ i }}">{{ i }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="col-2">
+                <button style="font-size:10px" type="submit" class="btn btn-secondary"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </form>
+
+    {% for c in category %}
+        <div class="button-box mt-5">
+            <div style="margin-bottom:10px; display:inline-block; border: 2px solid transparent; border-bottom: 2px solid powderblue; border-radius: 5px;" disabled>{{ c }}</div>
+        </div>
+
+        <div class="row">
+            {% for r in records %}
+                {% if username == request.user.username or r.share %}
+                    {% if r.category == c %}
+                        <div class="col-sm-6">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <div class="row"> 
+                                        <div class="col-6">
+                                            <p class="card-title"><span style="background-color: aliceblue" > 구매 : {{ r.name|truncatechars:6 }}</span></p>
+                                        </div>
+                                        <div class="col-6">
+                                            <p class="card-subtitle mb-2 text-muted">가격 - {{ r.price |truncatechars:4}}원</p>
+                                        </div>
+                                    </div>
+                                    <div class="row"> 
+                                        <div class="col-8">
+                                            <p class="card-text">목적 - {{ r.purpose |truncatechars:10}}</p>
+                                        </div>
+                                        <div class="col-4">
+                                            공개 : 
+                                            {% if username == request.user.username %}
+                                                {% if r.share %}
+                                                <i class="fas fa-check-square"></i>
+                                                {% else %}
+                                                <i class="fas fa-times"></i>                                                {% endif %}
+                                            {% else %}
+                                                {% if request.user in r.like_user.all %}
+                                                    <a href="{% url 'consumption:like'  r.id %}" style="font-size:40px; text-decoration: none;">♥</a>
+                                                {% else %}
+                                                    <a href="{% url 'consumption:like' r.id %}" style="font-size:40px; text-decoration: none;">♡</a>
+                                                {% endif %}
+                                            {% endif %}
+                                        </div>
+                                        <div class="row mt-3"> 
+                                            <div class="col-9">
+                                                {% if username == request.user.username %}
+                                                    <a style="text-decoration: none;" href="{% url 'consumption:consumption-detail' pk=r.pk %}" class="card-link">자세히 보기</a>
+                                                {% endif %}
+                                            </div>
+                                            <div class="col-3">
+                                                <span style="color: red;"> ♥ </span>{{ r.likes }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
                 {% endif %}
-                {% endfor %}
-                
-            </select>
-            </div>
-    </div>
-    <div class="col-3">
-        <div class="input-group">
-            <select name="month" name="category"  class="form-select" aria-label="Default select example">
-            
-            {% for i in month %}
-            <option selected value ="{{ i }}">{{ i }}</option>
             {% endfor %}
-            
-            
-            
-                
-            </select>
-            </div>
-    </div>
-    <div class="col-3">
-        <div class="input-group">
-            
-            <select name="date"  class="form-select" aria-label="Default select example">
-        
-                {% for i in date %}
-                <option selected value="{{ i }}">{{ i }}</option>
-                {% endfor %}
-                
-            </select>
-            </div>
-    </div>
-    <div class="col-2">
-        <button style="font-size:10px" type="submit" class="btn  btn-secondary">검색</button>
-    </div>
-</div>
-</form>
-
-{% for c in category %}
-<button type="button" style="background-color:cadetblue; margin-bottom:10px" class="btn btn-secondary  mt-5" disabled>{{c}}</button>
-
-<div class="row">
-    
-        {% for r in records %}
-        {% if username == request.user.username or r.share %}
-        {% if r.category == c %}
-    <div class="col-sm-6">
-        <div class="card mb-3">
-            <div class="card-body">
-                <div class="row"> 
-                    <div class="col-6">
-                        <p class="card-title">{{r.name}}</p>
-                    </div>
-                    <div class="col-6">
-                        <p class="card-subtitle mb-2 text-muted">{{r.price}}원</p>
-                    </div>
-                </div>
-              <h3 class="card-text">{{r.purpose}}</h3>
-              <div class="row"> 
-                <div class="col-10">
-                    {% if username == request.user.username %}
-                    <a style="text-decoration: none;" href="{% url 'consumption:consumption-detail' pk=r.pk %}" class="card-link">자세히 보기</a>
-                    {% endif %}
-                </div>
-                <div class="col-2">
-                    <div class="container">{{r.likes}}
-                    {% if username == request.user.username %}
-                        {% if r.share %}
-                            <button type="button" class="btn btn-info" disabled></button>
-                        {% else %}
-                            <button type="button" class="btn btn-dark" disabled></button>
-                        {% endif %}
-                    {% else %}
-                    {% if request.user in r.like_user.all %}
-                        <a href="{% url 'consumption:like'  r.id %}" style="font-size:40px; text-decoration: none;">♥</a>
-                        {% else %}
-                        <a href="{% url 'consumption:like' r.id %}" style="font-size:40px; text-decoration: none;">♡</a>
-                        {% endif %}
-                    {% endif %}
-                </div>
-            </div>
-            </div>
-            </div>
-          </div>
-    </div>
-    {% endif %}
-    {% endif %}
-{% endfor %}
-
-</div>
-{% endfor %}
+        </div>
+    {% endfor %}
 {% endblock %}
-
