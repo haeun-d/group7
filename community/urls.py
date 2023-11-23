@@ -16,5 +16,6 @@ urlpatterns = [
     path('search/',search,name='search'),
     path('ott/',ott,name='ott'),
     path('<int:pk>/', views.food_detail, name='food-detail'),
+    path('comment/<int:pk>/', comment, name='comment'),
 ]
 
