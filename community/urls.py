@@ -10,10 +10,11 @@ urlpatterns = [
     path('community-main/',community_main, name="community-main"),
     path('food/',food,name='food'),
     path('delivery/', delivery, name='delivery'),
-    path('food-post/',food_post,name='food-post'),
-    path('delivery-post/',delivery_post,name='delivery-post'),
+    #path('food-post/',food_post,name='food-post'),
+    #path('delivery-post/',delivery_post,name='delivery-post'),
     path('create-post/',create_post,name='create-post'),
     path('search/',search,name='search'),
     path('ott/',ott,name='ott'),
+    path('<int:pk>/', views.food_detail, name='food-detail'),
 ]
 
