@@ -121,13 +121,31 @@
 <div class="row">
     {% for b in benefits %}
   <div class="col-sm-6 mb-3">
-    <div style="font-size:30px;" class="card">
+    <div class="card">
       <div class="card-body">
-        <h1 class="card-title">{{b.title}}</h1>
+        <div class="row">
+            <div class="col-7">
+                <h1 class="card-title">{{b.title}}
+                    
+                </h1>
+            </div>
+            <div class="col-5">
+                <p>D-day  {{b.remaining_days}}</p>
+            </div>
+        </div>
         <p class="card-text">{{b.introduction}}</p>
-          <!--<p class="card-text">{{b.detail}}</p>-->
-          <p class="card-text">{{b.deadline}}</p>
-        <a href="{% url 'map:benefit-detail' pk=b.pk %}" style="font-size:30px;"class="btn btn-outline-dart btn-block btn-sm btn-primary">자세히 보기</a>
+        <div class="row">
+            <div class="col-7">
+        <a href="{% url 'map:benefit-detail' pk=b.pk %}" class="btn btn-outline-dart btn-block btn-sm btn-primary">view more</a>
+    </div>
+    <div style="font-size:15px; color:steelblue; text-decoration:none;"  class="col-5">
+
+            {% if request.user in b.scrap.all %}
+  스크랩한 게시물
+
+
+  {% endif %}
+</div></div>
       </div>
     </div>
   </div>

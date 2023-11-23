@@ -4,27 +4,43 @@
 {% block title %}마이페이지{% endblock %}
 
 {% block content %}
-<div class="card mb-3">
+<div class="card mb-3" >
     <a style="text-decoration: none" href="{% url 'accounts:logout' %}">
-    <div class="card-body">
+    <div style="color:black" class="card-body">
       로그아웃
     </div>
 </a>
 </div>
 <div class="card mb-3">
     <a style="text-decoration: none" href="{% url 'accounts:update-user-info' %}">
-    <div class="card-body">
+    <div style="color:black" class="card-body">
       회원정보 수정
     </div>
 </a>
   </div>
-  <div class="card">
+  <div class="card mb-3">
     <a style="text-decoration: none" href="">
-    <div class="card-body">
+    <div style="color:black" class="card-body">
       내가 찜한 중고상품
     </div>
 </a>
   </div>
+
+<div class="card mb-3">
+  <a style="text-decoration: none" href="{% url 'accounts:map-scrap' %}">
+  <div style="color:black" class="card-body">
+    스크랩한 제휴 정보
+  </div>
+</a>
+</div>
+
+<div class="card mb-3">
+  <a style="text-decoration: none" href="">
+  <div style="color:black" class="card-body">
+    중고상품 리뷰 남기기
+  </div>
+</a>
+</div>
 
 
 {% endblock %}

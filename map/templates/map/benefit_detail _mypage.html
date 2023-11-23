@@ -5,7 +5,7 @@
 {% block content %}
 <div>
 <div class="container-fluid card ">
-  <a href="{% url 'map:map-benefit'%}"><button type="button" class="btn-close mt-3" aria-label="Close"></button></a>
+  <a href="{% url 'accounts:benefit-scrap'  %}"><button type="button" class="btn-close mt-3" aria-label="Close"></button></a>
   <div class="card-body"></div>
 
   <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
@@ -13,20 +13,7 @@
     <div class="row">
       <div class="col-9">
         <h1 class=" map_detail.html">{{benefit.title }}
-          <a style="color:rgb(224, 224, 52); font-size:30px; text-decoration:none;" href="{% url 'map:benefit-scrap' benefit.id %}">
 
-          {% if request.user in benefit.scrap.all %}
-          ★
-          {% else %}
-          <span id="scrap" style="cursor: pointer;">☆</span>
-          <script>
-            document.getElementById("scrap").addEventListener("click", function() {
-            alert("스크랩되었습니다. 마이페이지에서 확인 가능합니다");
-            });
-            </script>
-          {% endif %}
-          
-        </a>
         </h1>
 
       </div>

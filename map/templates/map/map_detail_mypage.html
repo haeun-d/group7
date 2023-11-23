@@ -5,27 +5,13 @@
 {% block content %}
 
 <div class="container-fluid card my-5">
-  <a href="{% url 'map:map-benefit'%}"><button type="button" class="btn-close my-3" aria-label="Close"></button></a>
+  <a href="{% url 'accounts:map-scrap'%}"><button type="button" class="btn-close my-3" aria-label="Close"></button></a>
 
   <div class="mx-3 map_detail.html">
     <h1>{{map.title }}
-      <a style="color:rgb(224, 224, 52); font-size:30px; text-decoration:none;" href="{% url 'map:map-scrap' map.id %}">
 
-        {% if request.user in map.scrap.all %}
-        ★
-        {% else %}
-        <span id="scrap" style="cursor: pointer;">☆</span>
-        <script>
-          document.getElementById("scrap").addEventListener("click", function() {
-          alert("스크랩되었습니다. 마이페이지에서 확인 가능합니다");
-          });
-          </script>
-        {% endif %}
-        
-      </a>
+
     </h1>
-
-    
 
   </div>
   <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">

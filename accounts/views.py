@@ -52,3 +52,17 @@ def update_userinfo(request):
         request.user.save()
         return redirect('accounts:mypage')
     return render(request, 'accounts/update_userinfo.html')
+
+def benefit_scrap(request):
+    benefits=request.user.scrap_benefits.all()
+    context = {
+        'benefits': benefits
+    }
+    return render(request, 'accounts/benefit_scrap.html', context)
+
+def map_scrap(request):
+    maps=request.user.map_benefits.all()
+    context={
+        'maps':maps
+    }
+    return render(request, 'accounts/map_scrap.html', context)
