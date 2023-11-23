@@ -11,7 +11,9 @@
             <span  class="input-group-text"> 아이디 : </span>
             {{ form.username|add_class:"form-control" }}
             {% if form.username.errors %}
-                <p class="error">{{ form.username.errors.as_text }}</p>
+            <script>
+                alert("{{ form.username.errors.as_text }}");
+            </script>
             {% endif %}
         </div>
 
@@ -19,7 +21,9 @@
             <span  class="input-group-text"> 비밀번호 :  </span>
             {{ form.password|add_class:"form-control" }}
             {% if form.password.errors %}
-                <p class="error">{{ form.password.errors.as_text }}</p>
+            <script>
+                alert("{{ form.password.errors.as_text }}");
+            </script>
             {% endif %}
           </div>
     </div>

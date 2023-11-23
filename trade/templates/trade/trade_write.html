@@ -3,42 +3,13 @@
 {% block title %}중고거래 물품 글쓰기{% endblock %}
 
 {% block content %}
+    <h3>글쓰기</h3>
 
-<form action="{% url 'trade:create' %}" method="POST">
-    {% csrf_token %}
-    <div>
-        <div class="input-group my-3">
-        <div>
-        <label for="title">제목</label><br>
-        <input type="text" name="title" id="title">
-     </div>
-
-     <div>
-         <label for="content">자세한 설명</label><br>
-         <textarea name="body" id="body" cols="30" rows="10"></textarea>
-     </div>
-     <div>
-         <label for="price">가격</label><br>
-         <input type="text" name="price" id="price">
-     </div>
-
-    <!-- 사진업로드하기
-    <div>
-        <label for="price">사진 올리기</label>
-        <input
-    </div>
-    -->
-
-     <div>
-         <label for="place">거래 희망 장소</label><br>
-        <input type="text" name="place" id="place">
-     </div>
-        </div>
-    </div>
-
-    <div class="my-5" style="text-align: center;">
-        <button type="submit" class="btn btn-lg btn-primary">작성완료</button>
-    </div>
-</form>
-
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+        <button type="submit">글 등록하기</button>
+    </form>
 {% endblock %}

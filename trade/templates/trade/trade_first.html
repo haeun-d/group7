@@ -4,24 +4,33 @@
 
 {% block content %}
 
-<!-- 중고거래 물품 업로드 카드 -->
-{% for post in posts.all%}
-<div class="row row-cols-1 row-cols-md-3 g-4">
-  <div class="col">
-    <div class="card h-100">
-      <img src="..." class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">{{post.title}}</h5>
-        <p class="card-text">{{post.body}}</p>
-      </div>
-    </div>
+<div class="container">
+  <div class="row justify-content-center">
+    <!-- 중고거래 물품 업로드 카드 -->
+    {% for post in posts %}
+        <div class="card mx-3 mb-3" style="width: 18rem;">
+          {% if post.head_image %}
+            <img src="{{ post.head_image.url }}" class="card-img-top">
+          {% else %}
+            <img src=".." class="card-img-top">
+          {% endif %}
+          <div class="card-body">
+            <h5 class="card-title">{{ post.title }}</h5>
+            <p class="card-text">{{ post.body }}</p>
+            <a href="{% url 'trade:trade_detail' pk=post.pk %}" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+    {% endfor %}
   </div>
 </div>
-{%endfor%}
 
-<a class="my-5" style="text-align:center;" href="{% url 'trade:new' %}">
-  <button type="submit" class="btn btn-lg btn-primary">글쓰기</button>
-</a>
+<!--글쓰기 버튼 고정-->
+<div id="write-button" style="position: fixed; bottom: 20px; right: 20px;">
+  <a class="my-5" style="text-align:center;" href="{% url 'trade:create' %}">
+    <button type="submit" class="btn btn-lg btn-primary">글쓰기</button>
+  </a>
+</div>
+</div>
 
 {% endblock %}
 
