@@ -5,24 +5,24 @@
 
 {% block content %}
 <a href="{% url 'accounts:mypage'  %}"><button type="button" class="btn-close mb-3" aria-label="Close"></button></a>
-<h2 class="mb-4">회원정보 수정</h2>
+<h2 class="mt-4" >{{request.user.username}}님의 회원정보 수정</h2>
 <form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
 <div class="input-group my-3">
-    <span  class="input-group-text"> 닉네임 :  </span>
+    <span  class="input-group-text"> 닉네임   </span>
     <input name="nickname"  value="{{request.user.nickname}}" type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
   </div>
   <div class="input-group my-3">
-    <span  class="input-group-text"> 이메일 :  </span>
+    <span  class="input-group-text"> 이메일   </span>
     <input name="email" value="{{request.user.email}}" type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
   </div>
   {% if request.user.profile %}
   <p>현재 사진 <img style="text-align:center" src="{{request.user.profile.url}}" width="100px" height="100px"></p>
   {% else %}
-  <p>현재 등록된 사진 없음</p>
+  <p style="color:steelblue"> ※ 현재 등록된 사진 없음</p>
   {% endif %}
   <div class="input-group my-3">
-    <span class="input-group-text"> 프로필 사진 : </span>
+    <span class="input-group-text"> 프로필 사진  </span>
     <input name="profile" type="file" class="form-control" accept="image/*" aria-label="Profile picture input">
 </div>
 <div style="text-align: center;">
