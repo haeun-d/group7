@@ -5,59 +5,78 @@
 
 {% block content %}
 <div style="text-align: center;">
-<form action="" method="POST" enctype="multipart/form-data">
+<form action="" method="POST" enctype="multipart/form-data" id="signupForm">
     {% csrf_token %}
     <div class="input-group my-3">
-        <span  class="input-group-text"> 아이디  </span>
+        <span class="input-group-text"> 아이디  </span>
         {{ form.username|add_class:"form-control" }}
         {% if form.username.errors %}
-            <p class="error">{{ form.username.errors.as_text }}</p>
+        <script>
+          alert("{{ form.username.errors.as_text }}");
+      </script>
         {% endif %}
     </div>
-      <div class="input-group my-3">
-        <span  class="input-group-text"> 닉네임  </span>
+    <div class="input-group my-3">
+        <span class="input-group-text"> 닉네임  </span>
         {{ form.nickname|add_class:"form-control" }}
         {% if form.nickname.errors %}
-            <p class="error">{{ form.nickname.errors.as_text }}</p>
+        <script>
+          alert("{{ form.nickname.errors.as_text }}");
+      </script>
         {% endif %}
-      </div>
-      <div class="input-group my-3">
-        <span  class="input-group-text"> 프로필 사진  </span>
+    </div>
+    <div class="input-group my-3">
+        <span class="input-group-text"> 프로필 사진  </span>
         {{ form.profile|add_class:"form-control" }}
         {% if form.profile.errors %}
-            <p class="error">{{ form.profile.errors.as_text }}</p>
+        <script>
+          alert("{{ form.profile.errors.as_text }}");
+      </script>
         {% endif %}
-      </div>
-      <div class="input-group my-3">
-        <span  class="input-group-text"> 이메일  </span>
+    </div>
+    <div class="input-group my-3">
+        <span class="input-group-text"> 이메일  </span>
         {{ form.email|add_class:"form-control" }}
         {% if form.email.errors %}
-            <p class="error">{{ form.email.errors.as_text }}</p>
-        {% endif %}
-      </div>
-      <div class="input-group my-3">
-        <span  class="input-group-text"> 비밀번호   </span>
+        <script>
+          alert("{{ form.email.errors.as_text }}");
+      </script>
+      {% endif %}
+    </div>
+    <div class="input-group my-3">
+        <span class="input-group-text"> 비밀번호   </span>
         {{ form.password1|add_class:"form-control" }}
         {% if form.password1.errors %}
-            <p class="error">{{ form.password1.errors.as_text }}</p>
+        <script>
+          alert("{{ form.password1.errors.as_text }}");
+      </script>
         {% endif %}
-      </div>
-      <div class="input-group my-3">
-        <span  class="input-group-text"> 비밀번호 확인  </span>
+    </div>
+    <div class="input-group my-3">
+        <span class="input-group-text"> 비밀번호 확인  </span>
         {{ form.password2|add_class:"form-control" }}
         {% if form.password2.errors %}
-            <p class="error">{{ form.password2.errors.as_text }}</p>
+        <script>
+          alert("{{ form.password2.errors.as_text }}");
+      </script>
         {% endif %}
-      </div>
-
+    </div>
 
     <div class="my-5" style="text-align: center;">
-        <button type="submit" class="btn btn-lg btn-primary">회원가입</button>
+        <button type="submit" class="btn btn-lg btn-primary" id="btn">회원가입</button>
     </div>
-    <div style="text-align: center;">
-        이미 계정이 있으신가요?<br>
-        <a href="{% url 'accounts:login' %}">로그인</a>하러가기
-    </div>
+
 </form>
+
+{% if form.non_field_errors %}
+    <script>
+        alert("{{ form.non_field_errors.as_text|escapejs }}");
+    </script>
+{% endif %}
+
+</div>
+<div style="text-align: center;">
+    이미 계정이 있으신가요?<br>
+    <a href="{% url 'accounts:login' %}">로그인</a>하러가기
 </div>
 {% endblock %}

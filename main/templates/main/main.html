@@ -10,9 +10,30 @@ index
 {% else %}
 로그인이 필요합니다
 {% endif %}
-{% if request.user.profile %}
-<img src="{{request.user.profile.url}}">
-{% else %}
-<img src="/media/user/Graham.png">
-{% endif %}
+
+
+<header class="bg-primary text-white text-center py-5">
+  <img src="{% static 'img/Graham.png' %}" width="100px" height="200px">
+    <h1 class="display-4">About Us</h1>
+    <p class="lead">Learn more about our team and mission.</p>
+  </header>
+
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-lg-6">
+        <h2>Our Mission</h2>
+        <p>삼성 뛰어넘기</p>
+      </div>
+      <div class="col-lg-6">
+        <h2>Our Team</h2>
+        <ul class="list-group">
+          <li class="list-group-item">김은서 - 우</li>
+          <li class="list-group-item">여지원 - 린</li>
+          <li class="list-group-item">장다연 - 멋</li>
+          <li class="list-group-item">정하은 - 쟁</li>
+          <li class="list-group-item">한리안 - 이</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 {% endblock %}
