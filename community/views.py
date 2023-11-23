@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Post
-from .forms import PostForm
+from .models import Post, Comment
+from .forms import PostForm, CommentForm
 
 def community_main(request):
     return render(request,'community/community_main.html')
@@ -41,11 +41,26 @@ def search(request):
         posts=Post.objects.filter(title__icontains=query)
     else:
         if query:
-            posts = Post.objects.filter(title__icontains=query)
+            posts = Post.objects.filter(content__icontains=query)
         else:
             posts = []
     return render(request,'community/search_results.html',{'posts':posts, 'query':query})
 
+def comment(request, pk):
+    post=get_object_or_404(Post, pk=pk)
+    comments=Comment.objects.filter(post=post)
+
+    if request.method=='POST':
+        comment_form=CommentForm(request.POST)
+        if comment_form.is_valid():
+            new_comment=comment_form.save(commit=False)
+            new_comment.post=post
+            new_comment.author=request.user
+            new_comment.save()
+            return redirect('community:food-detail', pk=pk)
+        else:
+            comment_form=CommentForm()
+        return render(request, 'community/food_detail.html',{'post': post, 'comments':comments, 'comment_form':comment_form})
 
 
 #class PostList(ListView):

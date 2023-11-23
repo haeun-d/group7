@@ -1,29 +1,28 @@
-<!DOCTYPE html>
 {% extends 'base.html' %}
-
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% block title %}Search{% endblock %}
 {% block content %}
-    <h1>Search Results</h1>
-
-    <p>You searched for: {{ query }}</p>
+    <h2>Search Results for "{{ query }}"</h2>
 
     {% if posts %}
         {% for post in posts %}
-            <div class="card my-4">
-                <h5 class="card-header">{{ post.title }}</h5>
-                <div class="card-body">
-                    <p class="card-text">{{ post.content }}</p>
-                </div>
-            </div>
-        {% endfor %}
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="card mx-3 mb-3" style="width: 18rem;">
+                {% if post.head_image %}
+                    <img src="{{ post.head_image.url }}" class="card-img-top">
+                {% else %}
+                    <img src="" class="card-img-top">
+                {% endif %}
+                    <div class="card-body">
+            <h5 class="card-title">{{ post.title }}</h5>
+            <p class="card-text">{{ post.content }}</p>
+            <a href="{% url 'community:food-detail' pk=post.pk %}" class="btn btn-primary">Read More</a>
+          </div>
+        </div>
+  </div>
+    {% endfor %}
     {% else %}
         <p>No results found.</p>
     {% endif %}
+        </div>
 {% endblock %}
-</body>
-</html>
