@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+
+{% block title %}여기에 제목을 써주세요{% endblock %}
+
+{% block content %}
+{% include 'accounts/map_nav.html' %}
+<script>
+    let nav=document.getElementById("benefit");
+    nav.style.fontSize="30px";
+    // nav.style.color=blue;
+    nav.style.color = 'steelblue';
+</script>
+
+<div class="row">
+    {% for b in benefits %}
+  <div class="col-sm-6 my-3">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+            <div class="col-7">
+                <h1 class="card-title">{{b.title}}
+                    
+                </h1>
+            </div>
+            <div class="col-5">
+                <p>D-day  {{b.remaining_days}}</p>
+            </div>
+        </div>
+        <p class="card-text">{{b.introduction}}</p>
+        <div class="row">
+            <div class="col-7">
+        <a href="{% url 'map:benefit-scrap-detail' id=b.pk %}" class="btn btn-outline-dart btn-block btn-sm btn-primary">view more</a>
+    </div>
+    <div style="font-size:20px; color:steelblue; text-decoration:none;"  class="col-5">
+
+
+</div>
+</div>
+
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+{% endblock %}
