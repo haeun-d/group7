@@ -14,6 +14,6 @@ urlpatterns = [
     path('delivery-post/',delivery_post,name='delivery-post'),
     path('create-post/',create_post,name='create-post'),
     path('search/',search,name='search'),
-
+    path('ott/',ott,name='ott'),
 ]
 

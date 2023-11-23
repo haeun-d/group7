@@ -26,6 +26,9 @@ def create_post(request):
         form=PostForm()
     return render(request, 'community/create_post.html',{'form':form})
 
+def ott(request):
+    return render(request, 'community/ott.html')
+
 def search(request):
     query=request.GET.get('q')
 
