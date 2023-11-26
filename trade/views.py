@@ -1,6 +1,6 @@
 from django.http import Http404
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Post
+from .models import Post, Chatting, ChatRoom
 from .forms import PostForm
 from users.models import User
 
@@ -48,6 +48,45 @@ def edit_post(request, pk):
   
 def chat(request, pk):
     post = get_object_or_404(Post, pk=pk)
+    # 처음 열었을 경우는 저장, 아니면 그냥 값 들고옴 
+    chat_room, created=ChatRoom.objects.get_or_create(
+        buyer=request.user,
+        seller=post.author,
+        post=post
+    )
+    return redirect('trade:chating',pk, chat_room.id)
+
+
+def chat(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    # 처음 열었을 경우는 저장, 아니면 그냥 값 들고옴 
+    chat_room, created = ChatRoom.objects.get_or_create(
+        buyer=request.user,
+        seller=post.author,
+        post=post
+    )
+    return redirect('trade:chating', pk, chat_room.id)
+
+def into_chatroom(request, post_id, chatroom_id):
+    chat_room=get_object_or_404(ChatRoom, id=chatroom_id)
+
+    if request.method == "POST":
+        text = request.POST['text']
+        Chatting.objects.create(
+            text=text,
+            chat_room=chat_room,
+            writer=request.user
+        )
+        return redirect('trade:chating', post_id=post_id, chatroom_id=chatroom_id)
+
+    chats=Chatting.objects.filter(chat_room=chat_room)
+    return render(request, 'trade/chat.html', {'chats': chats})
+
+def seller_chat(request):
+    chat_room=ChatRoom.objects.filter(seller=request.user)
+    return render(request, 'trade/seller_chat.html',{'chat_room':chat_room})
+
+
     return render(request, 'trade/trade_chat.html', {'post': post})
 
 def like_post(request, pk):
