@@ -1,0 +1,5 @@
+{% for c in chat_room %}
+<a href="{% url 'trade:chating' c.post.id  c.id %}"><br><br><br>
+    사려는 물건-{{c.post.title}}<br>
+사려는사람 - {{c.buyer}}</a>
+{% endfor %}
