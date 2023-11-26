@@ -7,8 +7,9 @@ app_name = 'community'
 urlpatterns = [
     #path('', views.PostList.as_view()),
     #path('<int:pk>/', views.PostDetail.as_view()),
-    path('community/',community_main, name="community-main"),
+    path('community/',views.community_main, name="community-main"),
     path('food/',food,name='food'),
+    #path('food/',FoodListView.as_view(), name='food'),
     path('delivery/', delivery, name='delivery'),
     #path('food-post/',food_post,name='food-post'),
     #path('delivery-post/',delivery_post,name='delivery-post'),

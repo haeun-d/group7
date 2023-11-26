@@ -1,17 +1,37 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Post, Comment
 from .forms import PostForm, CommentForm
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def community_main(request):
     return render(request,'community/community_main.html')
 def delivery(request):
     return render(request, 'community/delivery.html')
 def food(request):
-    posts = Post.objects.all().order_by('-created_at')
+    all_posts = Post.objects.all().order_by('-created_at')
+    paginator = Paginator(all_posts, 5)
+    page=request.GET.get('page')
+
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        # 페이지 번호가 정수가 아닌 경우, 첫 번째 페이지를 반환합니다.
+        posts = paginator.page(1)
+    except EmptyPage:
+        # 페이지가 비어 있는 경우, 마지막 페이지를 반환합니다.
+        posts = paginator.page(paginator.num_pages)
     return render(request, 'community/food.html', {'posts': posts})
+'''
+class FoodListView(ListView):
+    model=Post
+    template_name='community/food,html'
+    context_objects_name='posts'
+    paginate_by=5
+    ordering=['-created_at']
+'''
 
 def category_posts(request, category):
-    posts=Post.objects.filter(category=category)
+    posts = Post.objects.filter(category=category).order_by('-created_at')
 
     return render(request, 'community/category_posts.html',{'posts':posts,'category':category})
 
