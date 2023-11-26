@@ -29,12 +29,13 @@
                     {% endif %}
                 </div>
                 <div class="col-5">
-                    <p>
-                        {{f.nickname}}
+                    <p style="font-size:15px">
+                        NAME : {{f.nickname}}<br>
+                        ID : {{f.username}}
                     </p>
                 </div>
                 <div class="col-3 my-3">
-                    <a href="{% url 'consumption:consumption' f.nickname %}"><button type="button" class="btn btn-secondary">보러가기</button></a>
+                    <a href="{% url 'consumption:consumption' f.nickname %}"><button type="button" class="btn btn-secondary">watch</button></a>
                 </div>
             </div>
         </div>
