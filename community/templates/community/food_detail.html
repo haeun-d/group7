@@ -11,7 +11,7 @@
       <img src=".." class="card-img-top">
     {% endif %}
     <div class="card-body">
-      <h5 class="card-title">{{ post.title }}</h5>
+      <h4 class="card-title">{{ post.title }}</h4>
       <p class="card-text">{{ post.content }}</p>
       <p class="card-text" style="font-size:10px">{{ post.created_at }}</p>
     </div>
@@ -36,6 +36,69 @@
       <button type="submit">댓글 남기기</button>
   </form>
   </div>
+</div>
+
+<div>
+  {% if post.author == user %}
+    <form method="post" id="delete-post-form" action="{% url 'community:delete-post' pk=post.pk %}">
+        {% csrf_token %}
+        <button type="button" class="btn btn-danger" onclick="confirmDelete()">게시글 삭제</button>
+    </form>
+  {% endif %}
+</div>
+
+<script>
+  function confirmDelete() {
+    var result = confirm("이 글을 삭제하시겠습니까?");
+
+    if (result) {
+      document.getElementById('delete-post-form').submit();
+      console.log("완료되었습니다.");
+    } else {
+      console.log("취소되었습니다");
+    }
+  }
+</script>
+
+<!--
+
+<div>
+  {% if post.author == user %}
+        <form method="post" id="delete-post-form" action="{% url 'community:delete-post' pk=post.pk %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger" onclick="confirmDelete()">게시글 삭제</button>
+        </form>
+  {% endif %}
+</div>
+
+<script>
+  function confirmDelete() {
+    var result = confirm("이 글을 삭제하시겠습니까?");
+
+    if (result) {
+      document.getElementById('delete-post-form').submit();
+      console.log("완료되었습니다.");
+    } else {
+      console.log("취소되었습니다");
+    }
+  }
+</script>
+-->
+<!--
+    if (result) {
+      document.getElementById('delete-post-form').submit();
+    } else {
+    event.preventDefault();
+    }
+    return result;
+-->
+
+<div>
+    {% if post.author == user %}
+        <a href="{% url 'community:edit-post' pk=post.pk %}" class="btn btn-primary">
+            <button type="submit" class="btn btn-lg btn-primary">수정하기</button>
+        </a>
+    {% endif %}
 </div>
 
 {% endblock %}

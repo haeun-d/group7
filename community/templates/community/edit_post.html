@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}같이 밥 먹어요{% endblock %}
+
+{% block content %}
+<h2>Edit Post</h2>
+<form method="post" action="{% url 'community:edit-post' pk=post.pk %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+</form>
+{% endblock %}
