@@ -24,8 +24,9 @@
 </head>
 <body>
   <div class="container-xl mt-5">
-    <a href="{% url 'consumption:my-consumption' request.user.username %}"><button type="button" class="btn-close mb-5" aria-label="Close"></button></a>
-    <h2>금융을 기록해보아요</h2>
+    <!--취소버튼-->
+    <a href="{% url 'consumption:consumption' request.user.nickname %}"><button type="button" class="btn-close mb-5" aria-label="Close"></button></a>
+    <h2>금융기록을 수정해보아요</h2>
     <form action="" method="POST">
 
     {% csrf_token %}

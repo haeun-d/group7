@@ -63,9 +63,6 @@ ROOT_URLCONF = 'alchanso.urls'
 
 TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 
-STATIC_URL = '/static/'
-STATIC_ROOT=os.path.join(BASE_DIR/'static')
-STATICFILES_DIRS = []
 
 TEMPLATES = [
     {
@@ -126,7 +123,9 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 
-
+STATIC_URL = '/static/'
+STATIC_ROOT=os.path.join(BASE_DIR/'static')
+STATICFILES_DIRS = []
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT=os.path.join(BASE_DIR/'media')

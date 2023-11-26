@@ -11,7 +11,7 @@
 <div class="container">
     <form method="POST" actin="" class="d-flex">
         {% csrf_token %}
-        <input  name="search" class="form-control me-2" type="search" placeholder="아이디를 검색하세요" aria-label="Search">
+        <input  name="search" class="form-control me-2" type="search" placeholder="아이디 혹은 닉네임을 검색하세요" aria-label="Search">
         <button class="btn btn-outline-primary" type="submit">Search</button>
       </form>
 </div>
@@ -29,17 +29,18 @@
                     {% endif %}
                 </div>
                 <div class="col-5">
-                    <p>
-                        {{u.username}}
+                    <p style="font-size:15px">
+                        NAME : {{u.nickname}}<br>
+                        ID : {{u.username}}
                     </p>
                 </div>
                 <div class="col-3">
-                    {% if u.username in following %}
-                    <a href="{% url 'consumption:unfollow' u.username %}"><button type="button" class="btn btn-secondary my-3">un<br>follow</button></a>
+                    {% if u.nickname in following %}
+                    <a href="{% url 'consumption:unfollow' u.nickname %}"><button type="button" class="btn btn-secondary my-3">un<br>follow</button></a>
                     {% elif request.user == u %}
                     <button type="button" class="btn btn-lg btn-secondary">본인</button>
                     {% else %}
-                    <a href="{% url 'consumption:follow' u.username %}"><button type="button" class="btn  btn-secondary my-4">follow</button></a>
+                    <a href="{% url 'consumption:follow' u.nickname %}"><button type="button" class="btn  btn-secondary my-4">follow</button></a>
                     {% endif %}
                 </div>
             </div>

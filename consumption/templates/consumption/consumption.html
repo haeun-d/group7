@@ -3,11 +3,11 @@
 {% block title %}금융관리{% endblock %}
 
 {% block content %}
-    {% if username != request.user.username %}
+    {% if nickname != request.user.nickname %}
         <a style="text-decoration:none;" href="{% url 'consumption:friend' %}">
             <button type="button" class="btn-close my-2" aria-label="Close"></button>
         </a>
-        <span style="color : steelblue;">{{username}}</span>님의 기록입니다
+        <span style="color : steelblue;">{{nickname}}</span>님의 기록입니다
     {% else %}
         {% include 'consumption/consumption_nav.html' %}
         <script>
@@ -18,18 +18,13 @@
         </script>
     {% endif %}
 
-    <div style="position: fixed; bottom: 0; margin-left: 700px;">
-        <a href="{% url 'consumption:calender' %}">
-            <button type="button" class="btn btn-lg btn-primary m-5">금융 기록하기</button>
-        </a>
-    </div>
 
     <div class="row my-4">
         <div class="col-8">
             <h1>{{ find_y }}년 {{ find_m }}월 {{ find_d }}일</h1>
         </div>
         <div class="col-4">
-            {% if username == request.user.username %}
+            {% if nickname == request.user.nickname %}
                 <a href="{% url 'consumption:calender' %}">
                     <button type="button" class="btn btn-primary">기록하기</button>
                 </a>
@@ -85,7 +80,7 @@
 
         <div class="row">
             {% for r in records %}
-                {% if username == request.user.username or r.share %}
+                {% if nickname == request.user.nickname or r.share %}
                     {% if r.category == c %}
                         <div class="col-sm-6">
                             <div class="card mb-3">
@@ -103,7 +98,7 @@
                                             <p class="card-text">목적 - {{ r.purpose |truncatechars:10}}</p>
                                         </div>
                                         <div class="col-4">
-                                            {% if username == request.user.username %}
+                                            {% if nickname == request.user.nickname %}
                                             공개 : 
                                             
                                                 {% if r.share %}
@@ -115,7 +110,7 @@
                                         </div>
                                         <div class="row mt-3"> 
                                             <div class="col-9">
-                                                {% if username == request.user.username %}
+                                                {% if nickname == request.user.nickname %}
                                                     <a style="text-decoration: none;" href="{% url 'consumption:consumption-detail' pk=r.pk %}" class="card-link">view more</a>
                                                 {% endif %}
                                             </div>
