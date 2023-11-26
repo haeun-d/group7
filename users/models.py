@@ -21,7 +21,7 @@ class CustomUserManager(BaseUserManager):
 
 class User(AbstractUser):
     email = models.EmailField(max_length=30, unique=True, null=False, blank=False)
-    nickname = models.CharField(max_length=20)
+    nickname = models.CharField(max_length=20,unique=True)
     profile=models.ImageField(upload_to="profile/", null=True)
     objects = CustomUserManager()
     def __str__(self):
