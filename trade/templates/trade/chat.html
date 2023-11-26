@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% block title %}채팅방{% endblock %}
+
+{% block content %}
+<style>
+    .chat-container {
+        width: 100%;
+        height: 700px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        background-color: #f9f9f9;
+    }
+
+    .message-container {
+        display: flex;
+        flex-direction: column;
+        max-width: 100%;
+        height: calc(100% - 60px);
+        overflow-y: auto;
+        margin-bottom: 10px;
+    }
+
+    .message {
+        max-width: 70%; /* Adjust the maximum width as needed */
+        word-break: break-word; /* Allow words to break if they are too long */
+        margin-bottom: 10px;
+    }
+
+    .sender,
+    .receiver {
+        padding: 10px;
+        border-radius: 8px;
+    }
+
+    .sender {
+        background-color: #f8f5c6;
+        text-align: right;
+        align-self: flex-end; /* Align sender messages to the right */
+    }
+
+    .receiver {
+        background-color: rgb(221, 237, 240);
+        text-align: left;
+        align-self: flex-start; /* Align receiver messages to the left */
+    }
+
+    .input-container {
+        display: flex;
+    }
+
+    .input-field {
+        flex: 1;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .send-button {
+        padding: 5px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+    }
+</style>
+
+<div class="chat-container">
+    <div class="message-container" id="message-container">
+        {% for c in chats %}
+            <div class="message {% if request.user == c.writer %}sender{% else %}receiver{% endif %}">
+                <div>
+                    {{ c.text }}<br>
+                    <small>{{ c.writer }} - {{ c.created_at }}</small>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <form method="POST" class="input-container">
+        {% csrf_token %}
+        <input
+            name="text"
+            type="text"
+            class="input-field"
+            id="dynamic-input-field"
+            oninput="updateChatContainerSize(this)"
+        />
+        <button type="submit" class="send-button">Send</button>
+    </form>
+
+    <script>
+        function updateChatContainerSize(input) {
+            var messageContainer = document.getElementById('message-container');
+            messageContainer.style.maxWidth = input.offsetWidth + 'px';
+            
+            // Scroll to the bottom of the message container
+            messageContainer.scrollTop = messageContainer.scrollHeight;
+        }
+    </script>
+</div>
+{% endblock %}
