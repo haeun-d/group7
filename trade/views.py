@@ -64,3 +64,4 @@ def liked_posts(request):
     # 현재 로그인한 사용자가 찜한 글들을 가져옴
     liked_posts = request.user.liked_posts.all()
     return render(request, 'trade/liked_posts.html', {'liked_posts': liked_posts})
+
