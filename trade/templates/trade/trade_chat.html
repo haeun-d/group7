@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자동 크기 조절 예제</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+        #chat-box {
+            margin: 20px;
+            max-width: 80%;
+            overflow-y: scroll;
+            border: 1px solid #ccc;
+            height: calc(100vh - 120px); /* 높이를 브라우저 높이에서 상하 여백을 뺀 값으로 설정 */
+            display: flex;
+            flex-direction: column-reverse; /* 역순으로 메시지 추가 */
+            padding: 10px;
+        }
+        .message-container {
+            display: flex;
+            justify-content: flex-end;
+            margin: 10px 0;
+        }
+        .my-message {
+            background-color: #DCF8C6;
+            border-radius: 10px;
+            padding: 10px;
+            word-wrap: break-word;
+            align-self: flex-end;
+            max-width: 50%; /* 최대 너비 설정 */
+        }
+        .other-message {
+            background-color: #E0E0E0;
+            border-radius: 10px;
+            padding: 10px;
+            word-wrap: break-word;
+            align-self: flex-start;
+            max-width: 50%; /* 최대 너비 설정 */
+        }
+        #input-box {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #ccc;
+        }
+        #message-input {
+            flex-grow: 2;
+            margin-right: 10px;
+        }
+        #send-button {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="chat-box"></div>
+    <div id="input-box">
+        <input type="text" id="message-input" placeholder="메시지를 입력하세요" onkeypress="handleKeyPress(event)">
+        <button id="send-button" onclick="sendMessage()">전송</button>
+    </div>
+
+    <script>
+        // Canvas 요소
+        var canvas = document.getElementById('chat-box');
+        var ctx = canvas.getContext('2d');
+
+        // 초기 크기 설정
+        resizeCanvas();
+
+        // 창 크기가 변경될 때마다 크기 조절
+        window.addEventListener('resize', resizeCanvas);
+
+        function resizeCanvas() {
+            // 창의 가로 및 세로 크기 가져오기
+            canvas.style.height = (window.innerHeight - 120) + 'px';
+
+            // 크기에 따른 추가적인 동작 수행 가능
+            // 예: 그리기, 애니메이션 등
+            drawSomething();
+        }
+
+        function drawSomething() {
+            // 여기에 그리기 코드 추가
+            // 예: ctx.fillRect(0, 0, canvas.width, canvas.height);
+        }
+
+        function sendMessage() {
+            var messageInput = document.getElementById('message-input');
+            var chatBox = document.getElementById('chat-box');
+
+            var message = messageInput.value;
+            if (message.trim() === '') return;
+
+            var messageContainer = document.createElement('div');
+            var messageElement = document.createElement('div');
+
+            if (messageContainer.classList.contains('my-message')) {
+                messageContainer.classList.remove('my-message');
+                messageContainer.classList.add('other-message');
+            } else {
+                messageContainer.classList.add('my-message');
+            }
+
+            messageElement.textContent = message;
+            messageContainer.appendChild(messageElement);
+            chatBox.appendChild(messageContainer);
+
+            // 동적으로 말풍선 크기 조절
+            adjustChatBoxSize();
+
+            messageInput.value = '';
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        function adjustChatBoxSize() {
+            var chatBox = document.getElementById('chat-box');
+            var lastMessage = chatBox.lastChild;
+
+            if (lastMessage) {
+                chatBox.style.width = lastMessage.offsetWidth + 'px';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -5,16 +5,19 @@ from users.models import *
 from django.http import Http404
 from django.views.generic import  DetailView
 # Create your views here.
-y = [n for n in range(2023, 1999, -1)]
-m=[n for n in range(1,13)]
-d=[n for n in range(1,32)]
 
-def parseTime(date):
+y = [n for n in range(2023, 1999, -1)] # 2023-부터 2000 year
+m=[n for n in range(1,13)] # 1~12 month
+d=[n for n in range(1,32)] # 1~31 day
+
+# 입력받은 날짜(%m/%d/%Y)를 month, day, year로 분할 후 리턴
+def parseTime(date): 
     m=date[0:2]
     d=date[3:5]
     y=date[6:10]
     return y,m,d
 
+# 가장 많이 출현한 카테고리를 리턴, 여러개일 수 있으니 리스트로 리턴
 def common_category(a,b,c,d,e,f):
     max_count=max(a, b, c, d, e)
     common_category_list=[]
@@ -33,22 +36,21 @@ def common_category(a,b,c,d,e,f):
 
     return common_category_list
 
-def main_consumption(request, username):
-    request.session['username'] = username
-    user = User.objects.get(username=username)
-    print(user.like_user.all())   
-
-    if(request.user==user):
-        me=True
-    else:
-        me=False
+# 금융 기록
+def main_consumption(request, nickname):
+    # like에서 처리한 후 다시 main_consumption으로 리다이렉트 할 때 최근에 조회했던 사용자를 조회하도록 해야 하므로 세션으로 처리함
+    request.session['nickname'] = nickname
+    # 조회하는 유저 확인
+    user = User.objects.get(nickname=nickname)
 
     if request.method=="GET":
         try:
+            # 세션에 입력되어 있는 값이 있는지 확인
             year=request.session['year']
             month=request.session['month']
             date=request.session['date']
         except:
+            # 없다면 현재 시간으로 초기화
             today=datetime.today().strftime("%m/%d/%Y")
             year, month, date=parseTime(today)
     else:
@@ -70,13 +72,15 @@ def main_consumption(request, username):
         "date":d,
         "records":records,
         "category":category,
-        "username":username
+        "nickname":nickname
     }
-    return render(request, 'consumption/my_consumption.html', context)
+    return render(request, 'consumption/consumption.html', context)
         
+# (알찬소 영수증) 금융 기록 조회
 class consumption_detail(DetailView):
     model=Record
 
+# 금융 기록 수정
 def calender_update(request, id):
     record=get_object_or_404(Record, id=id)
     if request.method=="POST":
@@ -100,13 +104,21 @@ def calender_update(request, id):
         record.detail=detail
         record.writer=request.user
         record.save()
-        return redirect('consumption:my-consumption', request.user.username)
+        return redirect('consumption:consumption', request.user.nickname)
     else:
         return render(request, 'consumption/calener_update.html',{"record":record})
 
+# 금융 기록 작성
 def calender(request):
     if request.method=="GET":
-        return render(request, 'consumption/calender.html')
+        # 기본적으로 오늘이 등록되도록 
+        today=datetime.today().strftime("%m/%d/%Y")
+        context={
+            'today':today
+        }
+
+        return render(request, 'consumption/calender.html',context)
+    # 폼에 등록되어 있는 정보 가져옴 
     else:
         full_date=request.POST.get('full_date')
         price=request.POST.get('price')
@@ -117,6 +129,7 @@ def calender(request):
         detail=request.POST.get('detail')
         share = request.POST.get('share') == "True"
         year, month, date=parseTime(full_date)
+        # Record 객체 생성 
         Record.objects.create(
             year=year,
             month=month,
@@ -129,15 +142,15 @@ def calender(request):
             detail=detail,
             writer=request.user
         )
-        return redirect('consumption:my-consumption', request.user.username)
+        return redirect('consumption:consumption', request.user.nickname)
 
-
+# 금융 기록 삭제 
 def delete(request, id):
     record=get_object_or_404(Record, id=id)
     record.delete()
-    return redirect('consumption:my-consumption', request.user.username)
+    return redirect('consumption:onsumption', request.user.nickname)
 
-
+# 팔로잉한 친구 조회 
 def friend(request):
     following=request.user.following.all()
     following_array=[n.following for n in following]
@@ -147,48 +160,58 @@ def friend(request):
     }
     return render(request, 'consumption/friend.html', context)
 
+# 친구 조회 (닉네임 or 아이디)
 def search_friend(request):
     if request.method=="POST":
         search=request.POST.get("search")
+        # 친구 팔로우 해도 검색 상태가 유지되도록 세션에 넣음 
         request.session['search'] = search
-        users=User.objects.filter(username__contains=search)
+        # 닉네임으로 검색 1
+        users=User.objects.filter(nickname__contains=search)
+        # 닉네임으로 검색해도 나오지 않으면 아이디로 검색
+        if not users:
+            users=User.objects.filter(username__contains=search)
     else:
         try:
-            users=User.objects.filter(username__contains=request.session['search'])
+            users=User.objects.filter(nickname__contains=request.session['search'])
         except:
             users=None
+    # 현재 유저가 팔로잉한 유저 객체를 모두 리턴 
     following=request.user.following.all() 
-    following_username_array=[n.following.username for n in following]
+    # 유저 객체 중 객체들의 username만 리턴 
+    following_nickname_array=[n.following.nickname for n in following]
     context={
-        "following":following_username_array,
+        "following":following_nickname_array,
         "users":users
     }
     return render(request, 'consumption/search_friend.html', context)
 
-def follow(request, username):
-    following=User.objects.get(username=username)
+# 팔로우
+def follow(request, nickname):
+    following=User.objects.get(nickname=nickname)
     Follow.objects.create(follower=request.user, following=following)
     return redirect("consumption:search-friend")
 
-def unfollow(request,username):
-    unfollowing=User.objects.get(username=username)
+# 언팔로우
+def unfollow(request,nickname):
+    unfollowing=User.objects.get(nickname=nickname)
     relation=Follow.objects.filter(follower=request.user, following=unfollowing)
     relation.delete()
     return redirect("consumption:search-friend")
 
+# 금융기록 좋아요
 def like(request, id):
-    print("in")
     record=get_object_or_404(Record, id=id)
+    # 레코드 객체의 좋아요에 사용자가 없는경우 -> 좋아요를 누르도록 처리해야 함
     if request.user not in record.like_user.all():
         record.like_user.add(request.user)
         record.likes+=1
+    # 레코드 객체의 좋아요에 사용자가 있는경우 -> 좋아요를 해제하도록 처리해야 함
     else:
         record.like_user.remove(request.user)
         record.likes-=1
     record.save()
-    print(record.like_user.all())
-    print("in")
-    return redirect('consumption:my-consumption', request.session['username'])
+    return redirect('consumption:consumption', request.session['nickname'])
 
 def statistic(request):
     if request.method=="POST":

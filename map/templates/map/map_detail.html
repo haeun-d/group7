@@ -10,7 +10,9 @@
   <div class="mx-3 map_detail.html">
     <h1>{{map.title }}
       <a style="color:rgb(224, 224, 52); font-size:30px; text-decoration:none;" href="{% url 'map:map-scrap' map.id %}">
-
+        <!-- map은 인증된 사용자가 아니여도 들어올 수 있으므로 스크랩 전 인증된 사용자인지 확인-->
+      {% if request.user.is_authenticated %}
+        <!--map을 스크랩 한 사용자들 중 현재 사용자가 포함되는가?-->
         {% if request.user in map.scrap.all %}
         ★
         {% else %}
@@ -21,11 +23,9 @@
           });
           </script>
         {% endif %}
-        
+      {% endif %}
       </a>
     </h1>
-
-    
 
   </div>
   <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
@@ -49,8 +49,8 @@
 </div>
   <div class="card-body">
 
-    
-      <p class="card-title">{{ map.place }} - <a href="https://www.google.co.kr/maps/place/{{ map.place|urlencode }}">지도 검색</a></p>
+      <!--장소를 구글 지도와 연결, 한글이기 때문에 인코딩해줌-->
+      <p class="card-title">{{map.place}} - <a href="https://www.google.co.kr/maps/place/{{ map.place|urlencode }}">지도 검색</a></p>
 
 
       <p class="card-text">{{map.introduction}}</p>
