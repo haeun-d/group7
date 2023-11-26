@@ -68,11 +68,6 @@
 
 </form>
 
-{% if form.non_field_errors %}
-    <script>
-        alert("{{ form.non_field_errors.as_text|escapejs }}");
-    </script>
-{% endif %}
 
 </div>
 <div style="text-align: center;">

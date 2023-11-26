@@ -3,20 +3,18 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout
 from .forms import  SignUpForm
 
-
+# 회원가입
 def signup_view(request):
     if request.method == "GET":
         form = SignUpForm()
         context = {'form': form}
         return render(request, 'accounts/signup.html', context)
-
     form = SignUpForm(request.POST, request.FILES)
+    # 유효한 내용인지 확인
     if form.is_valid():
         user = form.save()
- 
         return redirect('main')
     else:
-        print(form.errors)
         return render(request, 'accounts/signup.html', {'form': form})
 
 
