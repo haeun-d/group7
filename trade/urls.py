@@ -7,5 +7,6 @@ urlpatterns=[
     path('',views.trade_first,name='trade'),
     path('create/', views.create, name='create'),
     path('<int:pk>/', views.trade_detail, name='trade_detail'),
-    # path('scrap/<int:id>/',)
+    path('<int:pk>/edit/', views.edit_post, name='edit_post'),
+    path('<int:pk>/delete/', views.delete_post, name='delete_post'),
 ]
