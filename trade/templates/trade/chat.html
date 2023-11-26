@@ -38,13 +38,13 @@
     .sender {
         background-color: #f8f5c6;
         text-align: right;
-        align-self: flex-end; /* Align sender messages to the right */
+        align-self: flex-end; 
     }
 
     .receiver {
         background-color: rgb(221, 237, 240);
         text-align: left;
-        align-self: flex-start; /* Align receiver messages to the left */
+        align-self: flex-start; 
     }
 
     .input-container {
@@ -60,7 +60,7 @@
 
     .send-button {
         padding: 5px;
-        background-color: #4CAF50;
+        background-color: steelblue;
         color: white;
         border: none;
         border-radius: 5px;
@@ -73,7 +73,7 @@
             <div class="message {% if request.user == c.writer %}sender{% else %}receiver{% endif %}">
                 <div>
                     {{ c.text }}<br>
-                    <small>{{ c.writer }} - {{ c.created_at }}</small>
+                    <small style="margin:0px; font-size: 10px;">작성자 : {{ c.writer.username }} - {{ c.created_at }}</small>
                 </div>
             </div>
         {% endfor %}
@@ -96,7 +96,7 @@
             var messageContainer = document.getElementById('message-container');
             messageContainer.style.maxWidth = input.offsetWidth + 'px';
             
-            // Scroll to the bottom of the message container
+            
             messageContainer.scrollTop = messageContainer.scrollHeight;
         }
     </script>
