@@ -21,11 +21,37 @@ def create_post(request):
     if request.method == 'POST':
         form = PostForm(request.POST)
         if form.is_valid():
+            form.instance.author = request.user
             form.save()
             return redirect('community:food')
     else:
         form = PostForm()
     return render(request, 'community/create_post.html', {'form': form})
+
+def delete_post(request,pk):
+    post=get_object_or_404(Post,pk=pk)
+
+    if request.user==post.author:
+        post.delete()
+
+    return redirect('community:food')
+
+def edit_post(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+
+    if request.user != post.author:
+        return redirect('community:food-detail', pk=post.pk)
+
+    if request.method == 'POST':
+        form = PostForm(request.POST, instance=post)
+        if form.is_valid():
+            form.save()
+            return redirect('community:food-detail', pk=post.pk)
+    else:
+        form = PostForm(instance=post)
+
+    return render(request, 'community/edit_post.html', {'form': form, 'post':post})
+
 
 def food_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
