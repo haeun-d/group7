@@ -13,6 +13,7 @@ urlpatterns = [
     #path('food-post/',food_post,name='food-post'),
     #path('delivery-post/',delivery_post,name='delivery-post'),
     path('create-post/',create_post,name='create-post'),
+    path('food/<str:category>/',category_posts, name='category-posts'),
     path('delete/<int:pk>/', delete_post, name='delete-post'),
     #path('edit/<int:pk>/', edit_post, name='edit-post'),
     path('edit/<int:pk>/', views.edit_post, name='edit-post'),

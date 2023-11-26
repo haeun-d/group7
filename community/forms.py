@@ -9,7 +9,7 @@ class CommentForm(forms.ModelForm):
 class PostForm(forms.ModelForm):
     class Meta:
         model=Post
-        fields=['title', 'content','head_image','file_upload']
+        fields=['title', 'content','head_image','file_upload','category']
 
     def __init__(self, *args, **kwargs):
         # Get the user from the form's kwargs

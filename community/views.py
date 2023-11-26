@@ -10,6 +10,11 @@ def food(request):
     posts = Post.objects.all().order_by('-created_at')
     return render(request, 'community/food.html', {'posts': posts})
 
+def category_posts(request, category):
+    posts=Post.objects.filter(category=category)
+
+    return render(request, 'community/category_posts.html',{'posts':posts,'category':category})
+
 #def food_post(request):
 #    posts=Post.objects.all()
 #    return render(request,'community/food.html',{'posts':posts})
