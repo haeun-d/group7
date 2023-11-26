@@ -2,6 +2,25 @@
 {% block title %}같이 밥 먹어요{% endblock %}
 
 {% block content %}
+<style>
+    .button-container {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+
+    .button-container button {
+        margin-top: 5px; /* 수정하기 버튼과 삭제 버튼 간격 조절 */
+    }
+
+    .button-container .btn-primary {
+        padding: 8px 15px; /* 수정하기 버튼 크기 조절 */
+    }
+
+</style>
 
 <div class="container">
   <div class="card mx-auto mt-5" style="width: 18rem;">
@@ -14,6 +33,7 @@
       <h4 class="card-title">{{ post.title }}</h4>
       <p class="card-text">{{ post.content }}</p>
       <p class="card-text" style="font-size:10px">{{ post.created_at }}</p>
+      <p class="card-text" style="font-size:10px">Category: {{ post.get_category_display }}></p>
     </div>
   </div>
 </div>
@@ -38,6 +58,7 @@
   </div>
 </div>
 
+<div class="button-container">
 <div>
   {% if post.author == user %}
     <form method="post" id="delete-post-form" action="{% url 'community:delete-post' pk=post.pk %}">
@@ -60,39 +81,6 @@
   }
 </script>
 
-<!--
-
-<div>
-  {% if post.author == user %}
-        <form method="post" id="delete-post-form" action="{% url 'community:delete-post' pk=post.pk %}">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-danger" onclick="confirmDelete()">게시글 삭제</button>
-        </form>
-  {% endif %}
-</div>
-
-<script>
-  function confirmDelete() {
-    var result = confirm("이 글을 삭제하시겠습니까?");
-
-    if (result) {
-      document.getElementById('delete-post-form').submit();
-      console.log("완료되었습니다.");
-    } else {
-      console.log("취소되었습니다");
-    }
-  }
-</script>
--->
-<!--
-    if (result) {
-      document.getElementById('delete-post-form').submit();
-    } else {
-    event.preventDefault();
-    }
-    return result;
--->
-
 <div>
     {% if post.author == user %}
         <a href="{% url 'community:edit-post' pk=post.pk %}" class="btn btn-primary">
@@ -100,6 +88,9 @@
         </a>
     {% endif %}
 </div>
+</div>
+
+
 
 {% endblock %}
 
