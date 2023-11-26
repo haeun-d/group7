@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Liked Posts{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>찜한 물품</h2>
+
+    {% if liked_posts %}
+        <div class="row">
+            {% for post in liked_posts %}
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <img src="{{ post.head_image.url }}" class="card-img-top" alt="Product Image">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ post.title }}</h5>
+                            <p class="card-text">{{ post.body }}</p>
+                            <p class="card-text">Price: {{ post.price }}</p>
+                            <a href="{% url 'trade:trade_detail' pk=post.pk %}" class="btn btn-primary">상세 보기</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>찜한 물품이 없습니다.</p>
+    {% endif %}
+</div>
+{% endblock %}
