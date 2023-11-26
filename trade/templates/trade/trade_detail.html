@@ -16,6 +16,20 @@
       <p class="card-text">{{ post.body }}</p>
       <p class="card-text">Price: {{ post.price }}</p>
 
+    <!-- 찜하기 버튼 -->
+      <div class="btn-group">
+        <form method="post" action="{% url 'trade:like_post' pk=post.pk %}">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-success">
+            {% if request.user in post.likes.all %}
+            취소하기
+            {% else %}
+            찜하기
+            {% endif %}
+          </button>
+        </form>
+      </div>
+
     <!-- 수정 버튼 -->
       {% if request.user == post.author %}
         <a href="{% url 'trade:edit_post' pk=post.pk %}" class="btn btn-warning">글 수정</a>

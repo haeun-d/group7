@@ -10,4 +10,6 @@ urlpatterns=[
     path('<int:pk>/edit/', views.edit_post, name='edit_post'),
     path('<int:pk>/delete/', views.delete_post, name='delete_post'),
     path('<int:pk>/chat/', views.chat, name='chat'),
+    path('<int:pk>/like/', views.like_post, name='like_post'),
+    path('liked/', views.liked_posts, name='liked_posts'),
 ]
