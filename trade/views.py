@@ -45,3 +45,7 @@ def edit_post(request, pk):
         form = PostForm(instance=post)
 
     return render(request, 'trade/trade_write.html', {'form': form})
+  
+def chat(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    return render(request, 'trade/trade_chat.html', {'post': post})
