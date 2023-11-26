@@ -27,7 +27,7 @@ def trade_detail(request, pk):
 def delete_post(request, pk):
     record=get_object_or_404(Post, pk=pk)
     record.delete()
-    return redirect('trade:trade', request.user.username)
+    return redirect('trade:trade')
 
 def edit_post(request, pk):
     post = get_object_or_404(Post, pk=pk)
@@ -87,3 +87,19 @@ def seller_chat(request):
     return render(request, 'trade/seller_chat.html',{'chat_room':chat_room})
 
 
+    return render(request, 'trade/trade_chat.html', {'post': post})
+
+def like_post(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+
+    if request.user in post.likes.all():
+        post.likes.remove(request.user)
+    else:
+        post.likes.add(request.user)
+
+    return redirect('trade:trade_detail', pk=pk)
+
+def liked_posts(request):
+    # 현재 로그인한 사용자가 찜한 글들을 가져옴
+    liked_posts = request.user.liked_posts.all()
+    return render(request, 'trade/liked_posts.html', {'liked_posts': liked_posts})
