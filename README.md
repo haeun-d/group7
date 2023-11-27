@@ -4,17 +4,13 @@
 
 <br><br><br>
 # 😎 개발팀원 소개 
-| <center> 김은서  </center> | <center>여지원 </center> | <center>장다연</center> | 
-| --- | --- | --- |
-| <center> <img width="150px" src="https://soopool.art/image/acnh/animal/Kitty.png" /></center> | <center><img width="150px" src="https://soopool.art/image/acnh/animal/Flurry.png" /></center> | <center><img width="150px" src="https://soopool.art/image/acnh/animal/Apple.png" /></center> | 
-| <center>로그인, 금융, 지도 </center> | <center> 커뮤니티 </center> | <center> 중고거래 </center> |
-| [@7beunseo](https://github.com/7beunseo)  | [@yjwon6621](https://github.com/yjwon6621) |  [@noeyadd](https://github.com/noeyadd) |
+| <center> 김은서  </center> | <center>여지원 </center> | <center>장다연</center> | <center>정하은 </center> | <center>한리안 </center> |
+| --- | --- | --- | --- | --- |
+| <center> <img width="150px" src="https://soopool.art/image/acnh/animal/Kitty.png" /></center> | <center><img width="150px" src="https://soopool.art/image/acnh/animal/Flurry.png" /></center> | <center><img width="150px" src="https://soopool.art/image/acnh/animal/Apple.png" /></center> | <center> <img width="150px" src="https://soopool.art/image/acnh/animal/Molly.png" /></center> | <center><img width="150px" src="https://soopool.art/image/acnh/animal/Bree.png" /></center> | 
+| <center>로그인, 회원가입<br>금융기록, 지도<br>거래 채팅방 </center> | <center> 커뮤니티 </center> | <center> 중고거래 </center> | <center>커뮤니티 </center> | <center> 중고거래 </center> |
+| [@7beunseo](https://github.com/7beunseo)  | [@yjwon6621](https://github.com/yjwon6621) |  [@noeyadd](https://github.com/noeyadd) | [@haeun-d](https://github.com/haeun-d)  | [@agigongju](https://github.com/agigongju) |
 
-| <center>정하은 </center> | <center>한리안 </center> | <center>. </center> | 
-| --- | --- | --- |
-| <center> <img width="150px" src="https://soopool.art/image/acnh/animal/Molly.png" /></center> | <center><img width="150px" src="https://soopool.art/image/acnh/animal/Bree.png" /></center> | <center><img width="150px" src="https://soopool.art/image/acnh/animal/Graham.png" /></center> | 
-| <center>커뮤니티 </center> | <center> 중고거래 </center> | <center>  </center> |
-| [@haeun-d](https://github.com/haeun-d)  | [@agigongju](https://github.com/agigongju) |   |
+
 
 <br><br><br>
 # 📙 프로젝트 소개<br><br>
@@ -22,20 +18,45 @@
 
 ### ✨ 서비스 핵심 기능<br>
 
-#### 금융 기록 
+#### 1️⃣ 로그인 & 회원가입 <br>
+
+<img width="200" height="420"  src="https://github.com/InternetProgramming7/group7/assets/128278212/f5cb9956-dcf4-4ac9-a595-f5c2bfefb92e">
+<img width="200" height="420"  src="https://github.com/InternetProgramming7/group7/assets/128278212/ed0522df-c1a6-4174-a91e-2c40acca154c">
+<img width="200" height="420"  alt="image" src="https://github.com/InternetProgramming7/group7/assets/128278212/ce241611-a22c-42af-999b-65ada90b9ad4">
+
+
+#### 2️⃣ 금융 기록 <br>
+
+<img width="200" height="420" alt="image" src="https://github.com/InternetProgramming7/group7/assets/128278212/fc701464-5139-45b5-8f40-d1704a5ca8be">
+<img width="200" height="420" src="https://github.com/InternetProgramming7/group7/assets/128278212/0e7094df-9dbb-4145-ab65-566060da6164">
+<img width="200" height="420" alt="image" src="https://github.com/InternetProgramming7/group7/assets/128278212/06ef1a06-0132-4da9-8ca5-8d29f5f2e04c">
+<img width="200" height="420" alt="image" src="https://github.com/InternetProgramming7/group7/assets/128278212/b093826c-72e2-4474-8c9b-0c90973510b2">
+
+<br> 
+
   - 금융 기록을 작성, 조회, 수정, 삭제하며 자신의 소비 기록을 남길 수 있다
   - 금융 기록을 작성할 때 공개를 해제하면 다른 사용자들에게 해당 기록은 보이지 않는다
   - 사용자의 닉네임, 혹은 아이디를 검색해서 사용자 간 팔로우, 언팔로우를 한다
   - 팔로잉한 사람들에 한해 다른 사용자들의 소비 기록을 보며 좋아요를 남길 수 있다
   - 자신의 소비를 기반으로 카테고리별 월별 소비 통계를 그래프르 확인할 수 있다
- 
 
-#### 제휴 정보 확인
+
+#### 3️⃣ 제휴 정보 확인
+
+<img width="200" height="420" alt="image" src="https://github.com/InternetProgramming7/group7/assets/128278212/7b97dffc-0abc-4ecd-a549-dda945ba7c47">
+<img width="200" height="420" alt="image" src="https://github.com/InternetProgramming7/group7/assets/128278212/9c74247f-1fb6-405c-9910-8ee81286887e">
+
+ <br> 
+ 
   - 학교 제휴 정보를 지도로 한눈에 보며 스크랩으로 내가 원하는 정보를 저장할 수 있다
   - 스크랩 정보는 마이페이지에서 확인한다
   - 기한이 지난 제휴 정보는 더이상 보이지 않는다
     
-#### 중고 거래
+#### 4️⃣ 중고 거래
+
+<img width="200" height="420"  alt="image" src="https://github.com/InternetProgramming7/group7/assets/128278212/78ae4fb7-5c53-4369-b4e4-d72059611279">
+ <br> 
+
   - 중고 상품을 올리고 수정 삭제할 수 있다
   - 소비자는 원하는 중고거래를 찜할 수 있다
   - 중고 거래 희망을 원하는 사용자는 중고 상품과 연결된 1:1 채팅 기능을 통해 판매자와 연락을 주고받는다
@@ -43,11 +64,11 @@
   - 판매자의 경우 올린 상품에서 요청받은 채팅을 확인할 수 있다
   - 거래가 완료된 경우 판매자는 구매한 사용자의 닉네임을 입력하여 판매 완료 표시를 한다
   - 판매자가 소비자를 정상 등록한다면 해당 중고 상품의 리뷰를 남길 수 있다
-  - 소비자가 해당 판매자의 평점을 남기면 판매자의 평점에 반영되고, 한번 이상 리뷰를 남길 수 없다
+  - 소비자가 해당 판매자의 평점을 남기면 판매자의 평점에 반영되고, 중복된 리뷰를 남길 수 없다
   - 거래가 완료되면 진행했던 1:1 채팅방을 나갈 수 있다
 
-#### 커뮤니티  
-  - 같이 배달시킬 사람, 여가생활이나 생필품 공동구매를 나눌 수 있는 카테고리로 분류된다
+#### 5️⃣ 커뮤니티  
+  - 같이 배달시킬 사람, 여가생활이나 생필품 공동구매 카테고리로 분류된다
   - 글 작성, 수정, 삭제가 가능하며 댓글을 남길 수 있다
 
 
@@ -55,10 +76,10 @@
 
 ### ✨ 기술 스택<br>
 
-- 기획디자인 : 피그마
+- 기획디자인 : <img src="https://img.shields.io/badge/figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white">
+- 백엔드 : <img src="https://img.shields.io/badge/python-3776AB?style=for-the-badge&logo=python&logoColor=white">  <img src="https://img.shields.io/badge/django-092E20?style=for-the-badge&logo=django&logoColor=white">
+- ETC : <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white"> <img src="https://img.shields.io/badge/notion-000000?style=for-the-badge&logo=notion&logoColor=white">
 - 프론트엔드 : Bootstap, Kakao map API
-- 백엔드 : python, django
-- ETC : git
 
 
 ### ✨ 폴더 구조<br>
