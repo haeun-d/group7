@@ -1,8 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout
 from .forms import  SignUpForm
-
+from trade.models import *
 # 회원가입
 def signup_view(request):
     if request.method == "GET":
@@ -17,23 +17,24 @@ def signup_view(request):
     else:
         return render(request, 'accounts/signup.html', {'form': form})
 
-
+# 로그인
 def login_view(request):
     if request.method=="GET":
         return render(request, 'accounts/login.html', {'form':AuthenticationForm})
-
     form=AuthenticationForm(request, data=request.POST)
     if form.is_valid():
         login(request, form.user_cache)
         return redirect('main')
     return render(request, 'accounts/login.html',{'form':form})
 
+# 로그아웃
 def logout_view(request):
     if request.user.is_authenticated:
         logout(request)
 
     return redirect('main')
 
+# 마이페이지
 def mypage(request):
     return render(request, 'accounts/mypage.html')
 
@@ -64,3 +65,32 @@ def map_scrap(request):
         'maps':maps
     }
     return render(request, 'accounts/map_scrap.html', context)
+
+# 내가 올린 중고거래
+def my_trade(request):
+    trades=Post.objects.filter(author=request.user)
+    context={
+        'trades':trades
+    }
+    return render(request, 'accounts/my_trade.html',context)
+
+def my_trade_detail(request, post_id):
+    post=get_object_or_404(Post, id=post_id)
+    context={
+        'post':post
+    }
+    return render(request, 'accounts/trade_detail.html',context)
+
+# 해당하는 중고거래에서 생긴 채팅방 조회
+def seller_chat(request, post_id):
+    chat_room=ChatRoom.objects.filter(post=post_id, seller=request.user)
+    return render(request, 'accounts/seller_chat.html',{'chat_room':chat_room})
+
+def proceeding_chat(request):
+    chat_room=ChatRoom.objects.filter( buyer=request.user)
+    return render(request,'accounts/buyer_chat.html',{'chat_room':chat_room} )
+
+def leave_chat_room(request, room_id):
+    chat_room=ChatRoom.objects.filter(id=room_id)
+    chat_room.delete()
+    return redirect('accounts:proceeding-chat')
