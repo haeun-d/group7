@@ -12,9 +12,11 @@
       <img src=".." class="card-img-top">
     {% endif %}
     <div class="card-body">
-      <h5 class="card-title">{{ post.title }}</h5>
+      <h3 class="card-title"><strong>{{ post.title }}</strong></h3>
       <p class="card-text">{{ post.body }}</p>
-      <p class="card-text">Price: {{ post.price }}</p>
+      <p class="card-text">가격 : {{ post.price }}</p>
+      <p class="card-text">만날 장소 : {{ post.place }}</p>
+
 
     <!-- 찜하기 버튼 -->
       <div class="btn-group">
