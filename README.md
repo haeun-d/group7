@@ -3,12 +3,12 @@
 ## 알찬 소비를 나누는 소비자 커뮤니티
 
 <br><br><br>
-# 개발팀원 소개개
+# 😎 개발팀원 소개 
 | <center> 김은서  </center> | <center>여지원 </center> | <center>장다연</center> | 
 | --- | --- | --- |
 | <center> <img width="150px" src="https://avatars.githubusercontent.com/u/128278212?v=4" /></center> | <center><img width="150px" src="https://soopool.art/image/acnh/animal/Flurry.png" /></center> | <center><img width="150px" src="https://soopool.art/image/acnh/animal/Apple.png" /></center> | 
 | <center>로그인, 금융, 지도 </center> | <center> 커뮤니티 </center> | <center> 중고거래 </center> |
-| [@7beunseo](https://github.com/7beunseo)  | [@yiwon6621](https://github.com/yiwon6621) |  [@noeyadd](https://github.com/noeyadd) |
+| [@7beunseo](https://github.com/7beunseo)  | [@yjwon6621](https://github.com/yjwon6621) |  [@noeyadd](https://github.com/noeyadd) |
 
 | <center>정하은 </center> | <center>한리안 </center> | <center>. </center> | 
 | --- | --- | --- |
