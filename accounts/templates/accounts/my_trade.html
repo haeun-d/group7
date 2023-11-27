@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+
+{% block title %}여기에 제목을 써주세요{% endblock %}
+
+
+{% block content %}
+<a href="{% url 'accounts:mypage' %}"><button type="button" class="btn-close m-2" aria-label="Close"></button></a>
+
+<div class="container">
+    <div class="row justify-content-center">
+      <!-- 중고거래 물품 업로드 카드 -->
+      {% for post in trades %}
+          <div class="card mx-3 mb-3" style="width: 18rem;">
+            {% if post.head_image %}
+              <img src="{{ post.head_image.url }}" height="200px" class="card-img-top">
+            {% else %}
+
+            {% endif %}
+            <div class="card-body">
+              <h5 class="card-title">{{ post.title }}</h5>
+              <p class="card-text">{{ post.body }}</p>
+              <a href="{% url 'accounts:my-trade-detail' post_id=post.pk %}" class="btn btn-primary">view more</a>
+            </div>
+          </div>
+          {% empty %}
+            <span class="m-3">올린 중고 상품이 없습니다.</span>
+      {% endfor %}
+      
+    </div>
+  </div>
+{% endblock %}
