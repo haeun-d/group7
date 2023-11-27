@@ -1,145 +1,71 @@
-<!DOCTYPE html>
 {% extends 'base.html' %}
-{% load static %}
-
-<html lang="en">
-<head>
-     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="{% static 'bootstrap.min.css' %}" rel="stylesheet" type="text/css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-
-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-
-    <style>
-    body {
-        width: 100%;
-        background-color: #f8f9fa;
-        font-size: 20px;
-    }
-
-    .container {
-        max-width: 100%;
-        margin-right: auto;
-        margin-left: auto;
-        padding-right: 0;
-        padding-left: 0;
-    }
-</style>
-
-</head>
-<body>
-{% block title %}같이 구매해요{% endblock %}
-
+{% block title %}공동구매해요{% endblock %}
 {% block content %}
-<a href="{% url 'community:delivery' %}"><button type="button" class="btn btn-lg btn-primary" >생필품</button></a>
-<a href="{% url 'community:ott' %}"><button type="button" class="btn btn-lg btn-primary" >OTT</button></a>
-<a href="{% url 'community:delivery' %}"><button type="button" class="btn btn-lg btn-primary" >인강</button></a>
-<div class="div-container"></div>
-<div class="container my-3">
-        <div class="row">
-            <div class="col-md-8 col-lg-9" id="main-area">
-                <h1>공동구매</h1>
 
-            {% if post_list.exists %}
-                {% for p in post_list %}
-                <!-- Blog Post -->
-                <div class="card mb-4">
-                    {% if p.head_image %}
-                    <img class="card-img-top" src="{{ p.head_image.url }}" alt="Card image cap">
-                    {% else %}
-                    <img class="card-img-top" src="https://picsum.photos/seed/{{ p.id }}/800/200" alt="random image">
-                    {% endif %}
-                    <div class="card-body">
-                        <h2 class="card-title"> {{ p.title }}</h2>
-                        <p class="card-text">{{ p.content | truncatewords:10 }}</p>
-                        <a href="{{ p.get_absolute_url }}" class="btn btn-primary">Read More &rarr;</a>
-                    </div>
-                    <div class="card-footer text-muted">
-                        Posted on {{ p.create_at }} by
-                        <a href="#"> 개발예정 </a>
-                    </div>
-                </div>
-            {% endfor %}
-        {% else %}
-                <h1>게시물이 없습니다.</h1>
-        {% endif %}
+<div>
+<a href="{% url 'community:category-delivery' category_delivery='daily' %}"><button type="button" class="btn btn-lg btn-primary" >생필품</button></a>
+<a href="{% url 'community:category-delivery' category_delivery='ott' %}"><button type="button" class="btn btn-lg btn-primary" >OTT</button></a>
+</div>
 
-                <!-- Pagination -->
-                <ul class="pagination justify-content-center mb-4">
-                    <li class="page-item">
-                        <a class="page-link" href="#">&larr; Older</a>
-                    </li>
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#">Newer &rarr;</a>
-                    </li>
-                </ul>
+<hr>
 
-            </div>
+<!-- Search Widget -->
+  <div class="container-fluid">
+    <form class="d-flex" method="get" action="{% url 'community:search-delivery' %}">
+      <input class="form-control me-2" type="text" name="q" class="form-control" placeholder="Search for...">
+      <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+  </div>
 
-            <div class="col-md-4 col-lg-3">
-                <!-- Search Widget -->
-                <div class="card my-4">
-                    <h5 class="card-header">Search</h5>
-                    <div class="card-body">
-                        <form action="{% url 'community:search' %}" method="get" class="input-group">
-                            <input type="text" class="form-control" placeholder="Search for..." name="q">
-                            <span class="input-group-btn">
-                                <button class="btn btn-secondary" type="submit">Go!</button>
-                            </span>
-                        </form>
-                    </div>
-                </div>
-
-                <!-- Categories Widget -->
-                <!---
-                <div class="card my-4">
-                    <h5 class="card-header">Categories</h5>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <ul class="list-unstyled mb-0">
-                                    <li>
-                                        <a href="#">Web Design</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">HTML</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Freebies</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="col-lg-6">
-                                <ul class="list-unstyled mb-0">
-                                    <li>
-                                        <a href="#">JavaScript</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">CSS</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Tutorials</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                --->
-            </div>
+<div class="container">
+  <div class="row justify-content-center">
+    {% for post in posts %}
+        <div class="card my-4" style="width: 30rem;">
+          {% if post.head_image %}
+            <img src="{{ post.head_image.url }}" class="card-img-top">
+          {% else %}
+            <img src=".." class="card-img-top">
+          {% endif %}
+          <div class="card-body">
+            <h5 class="card-title">{{ post.title }}</h5>
+            <p class="card-text" style="font-size: 14px">{{ post.content }}</p>
+            <a href="{% url 'community:delivery-detail' pk=post.pk %}" class="btn btn-primary">Read More</a>
+            <p class="text-right" style="font-size: 10px">{{ post.created_at }}</p>
+          </div>
         </div>
-    </div>
-<a href="{% url 'community:create-post' %}" class="btn btn-primary">글쓰기</a>
+      <hr>
+    {% endfor %}
+  </div>
 
+  <div class="pagination justify-content-center">
+    <ul class="pagination">
+      {% if posts.has_previous %}
+        <li class="page-item">
+          <a class="page-link" href="?page=1" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+      {% endif %}
+      {% for num in posts.paginator.page_range %}
+        <li class="page-item {% if num == page_obj.number %}active{% endif %}">
+          <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+        </li>
+      {% endfor %}
+      {% if posts.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      {% endif %}
+    </ul>
+  </div>
+</div>
 
+<div id="write-button" style="position: fixed; bottom: 20px; right: 20px;">
+  <a class="my-5" style="text-align:center;" href="{% url 'community:delivery-post' %}">
+    <button type="submit" class="btn btn-lg btn-primary">글쓰기</button>
+  </a>
+</div>
+</div>
 {% endblock %}
-
-{% for p in posts %}
-    <hr/>
-    <h2>{{ p.title }}</h2>
-    <h4>{{ p.create_at }}</h4>
-    <p>{{ p.content }}</p>
-{% endfor %}
-
-</body>
-</html>
