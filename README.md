@@ -16,6 +16,7 @@
 | <center>커뮤니티 </center> | <center> 중고거래 </center> | <center>  </center> |
 | [@haeun-d](https://github.com/haeun-d)  | [@agigongju](https://github.com/agigongju) |   |
 
+<br><br><br>
 # 📙 프로젝트 소개<br><br>
 
 
@@ -83,6 +84,7 @@
 ### ✨ 개발환경에서의 실행 방법<br>
   ```
   $ cd group7
+  $ source venv/Scripts/activate 
   $ python manage.py makemigrations
   $ python manage.py migrate
   $ python manage.py migrate --run-syncdb
