@@ -11,9 +11,12 @@
 
     {% endif %}
     <div class="card-body">
+      
       <h5 class="card-title">{{ post.title }}</h5>
       <p class="card-text">{{ post.body }}</p>
       <p class="card-text">Price: {{ post.price }}</p>
+      <p class="card-text">판매자: {{ post.author }} 평점 {{post.author.grade|floatformat:1}}</p>
+      
 
     <!-- 수정 버튼 -->
       {% if request.user == post.author %}

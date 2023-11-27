@@ -16,4 +16,5 @@ urlpatterns=[
     path('chatroom/<int:post_id>/',seller_chat, name='seller-chat'),
     path('proceeding-chat',proceeding_chat, name='proceeding-chat'),
     path('leave-chat-room/<int:room_id>/',leave_chat_room, name='leave-chat-room'),
+    path('review-list/',review_make, name='review-list')
 ]

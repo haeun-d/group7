@@ -58,7 +58,13 @@ def create_review(request, post_id):
             review = form.save(commit=False)
             review.post = post
             review.reviewer = request.user
+            # 전체 리뷰 수 증가
+            post.author.review_count+=1
+            post.author.save()
+            # 평점 계산
+            post.author.grade=(post.author.grade+review.rating)/post.author.review_count
             review.save()
+            post.author.save()
             return redirect('trade:trade_detail', pk=post_id)
     else:
         form = ReviewForm()

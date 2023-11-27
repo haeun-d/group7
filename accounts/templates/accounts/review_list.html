@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+
+{% block title %}여기에 제목을 써주세요{% endblock %}
+
+{% block content %}
+<a href="{% url 'accounts:mypage' %}"><button type="button" class="btn-close m-2" aria-label="Close"></button></a>
+
+{% for p in posts %}
+
+<div class="card mb-3">
+    <div style="color:black" class="card-body">
+        물건-{{p.title}}<br>
+        판매자 - {{p.author.nickname}}</a>
+    </div>
+    <a style="text-decoration: none" href="{% url 'trade:trade_detail' p.id %}">
+        <button type="button" class="btn btn-outline-primary m-3">리뷰 남기기</button>
+    </a>
+  </div>
+  
+
+{% endfor %}
+
+{% endblock %}
