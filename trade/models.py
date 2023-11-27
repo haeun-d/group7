@@ -12,6 +12,7 @@ class Post(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     likes = models.ManyToManyField(User, related_name='liked_posts', blank=True)
+    allowed_reviewer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='allowed_reviews')
 
     def __str__(self):
         return f'[{self.pk}]{self.title}'
@@ -28,3 +29,13 @@ class Chatting(models.Model):
     text=models.CharField(max_length=100)
     writer=models.ForeignKey(User, related_name='chatting_writer',on_delete=models.CASCADE)
     created_at=models.DateTimeField(auto_now_add=True)
+
+class Review(models.Model):
+    post = models.ForeignKey('Post', on_delete=models.CASCADE)
+    reviewer = models.ForeignKey(User, on_delete=models.CASCADE)
+    text = models.TextField()
+    rating = models.PositiveIntegerField(default=5)  # 1에서 5까지의 평가를 가정합니다.
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.reviewer}님의 {self.post.title}에 대한 후기'
