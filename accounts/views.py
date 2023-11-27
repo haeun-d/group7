@@ -90,10 +90,12 @@ def seller_chat(request, post_id):
     chat_room=ChatRoom.objects.filter(post=post_id, seller=request.user)
     return render(request, 'accounts/seller_chat.html',{'chat_room':chat_room})
 
+# 진행중인 채팅방 
 def proceeding_chat(request):
     chat_room=ChatRoom.objects.filter( buyer=request.user)
     return render(request,'accounts/buyer_chat.html',{'chat_room':chat_room} )
 
+# 채팅 나가기
 def leave_chat_room(request, room_id):
     chat_room=ChatRoom.objects.filter(id=room_id)
     chat_room.delete()

@@ -1,6 +1,6 @@
 from django.http import Http404
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Post, Chatting, ChatRoom
+from .models import Post, Chatting, ChatRoom, Review
 from .forms import PostForm, ReviewForm
 from users.models import User
 
@@ -22,7 +22,14 @@ def create(request):
 
 def trade_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
-    return render(request, 'trade/trade_detail.html', {'post': post})
+    find_review=Review.objects.filter(post=post,reviewer=request.user )
+
+    # 이미 후기가 존재한다면 후기를 남기지 못하도록 한정
+    if find_review!=None:
+        review_exists=True
+    else:
+        review_exists=False
+    return render(request, 'trade/trade_detail.html', {'post': post,'review_exists':review_exists})
 
 def delete_post(request, pk):
     record=get_object_or_404(Post, pk=pk)
@@ -51,9 +58,11 @@ def edit_post(request, pk):
 
 def create_review(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
+   
 
     if request.method == 'POST':
         form = ReviewForm(request.POST)
+                
         if form.is_valid():
             review = form.save(commit=False)
             review.post = post
