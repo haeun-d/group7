@@ -213,13 +213,18 @@ def like(request, id):
     record.save()
     return redirect('consumption:consumption', request.session['nickname'])
 
+# 금융 통계
 def statistic(request):
+    # 날짜 검색한 경우
     if request.method=="POST":
         year=request.POST.get("year")
         month=request.POST.get("month")
+    # 날짜 검색 없이 처음 get 요청인 경우 현재 달을 보여줌 
     else:
         today=datetime.today().strftime("%m/%d/%Y")
         year, month, date=parseTime(today)
+        
+    # 각각의 카테고리에 해당하는 Record 객체 필터링 
     total=Record.objects.filter(writer=request.user, year=year, month=month).count()
     food=Record.objects.filter(writer=request.user, category="음식", year=year, month=month)
     life=Record.objects.filter(writer=request.user, category="생필품", year=year, month=month)
@@ -231,7 +236,7 @@ def statistic(request):
     total_records= Record.objects.filter(writer=request.user, year=year, month=month)
     common_category_array=common_category(food.count(),life.count(),leisure.count(),transportation.count(),study.count(),etc.count())
     
-    # 통계
+    # 통계 계산
     try:
         food_p = (food.count() / total) * 100
         life_p = (life.count() / total) * 100
@@ -239,11 +244,13 @@ def statistic(request):
         transportation_p = (transportation.count() / total) * 100
         study_p = (study.count() / total) * 100
         etc_p = (etc.count() / total) * 100
-        
+    
+    # 아무 기록도 없을 경우 
     except:
         food_p=life_p=leisure_p=transportation_p=study_p=etc_p=0
         common_category_array=[]
 
+    # html에서 리스트로 접근하기 위해 리스트에 담음 
     value=[food_p, life_p, leisure_p, transportation_p, study_p, etc_p]
     value=','.join(map(str,value))
     context={

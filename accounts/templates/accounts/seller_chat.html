@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+
+{% block title %}여기에 제목을 써주세요{% endblock %}
+
+{% block content %}
+
+<a href="{% url 'accounts:mypage' %}"><button type="button" class="btn-close m-2" aria-label="Close"></button></a>
+
+{% for c in chat_room %}
+
+<div class="card mb-3">
+    <a style="text-decoration: none" href="{% url 'trade:chating' c.post.id  c.id %}">
+    <div style="color:black" class="card-body">
+        사려는 물건-{{c.post.title}}<br>
+        사려는사람 - {{c.buyer.nickname}}</a>
+    </div>
+  </a>
+  </div>
+
+{% endfor %}
+
+{% endblock %}

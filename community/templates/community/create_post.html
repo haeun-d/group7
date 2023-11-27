@@ -6,26 +6,12 @@
     <title>Title</title>
 </head>
 <body>
-{% block title %}Create a Post{% endblock %}
+{% block title %}Create a Post - My Site{% endblock %}
 
 {% block header %}Create a Post{% endblock %}
 
 {% block content %}
     <h2>Create a Post</h2>
-<hr>
-
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <table>
-            {{ form }}
-        </table>
-
-        <button type="submit">Submit</button>
-    </form>
-{% endblock %}
-</body>
-</html>
-<!---
 {% if messages %}
 <ul class="messages">
     {% for message in messages %}
@@ -34,6 +20,11 @@
   </ul>
 {% endif %}
 
-{{ form.as_p }}
-
--->
+    <form method="post" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+{% endblock %}
+</body>
+</html>

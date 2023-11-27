@@ -76,15 +76,15 @@ def chat(request, pk):
     return redirect('trade:chating',pk, chat_room.id)
 
 
-def chat(request, pk):
-    post = get_object_or_404(Post, pk=pk)
+def chat(request, post_id):
+    post=get_object_or_404(Post, pk=post_id)
     # 처음 열었을 경우는 저장, 아니면 그냥 값 들고옴 
     chat_room, created = ChatRoom.objects.get_or_create(
         buyer=request.user,
         seller=post.author,
         post=post
     )
-    return redirect('trade:chating', pk, chat_room.id)
+    return redirect('trade:chating', post_id, chat_room.id)
 
 def into_chatroom(request, post_id, chatroom_id):
     chat_room=get_object_or_404(ChatRoom, id=chatroom_id)
@@ -121,4 +121,3 @@ def like_post(request, pk):
 def liked_posts(request):
     liked_posts = request.user.liked_posts.all()
     return render(request, 'trade/liked_posts.html', {'liked_posts': liked_posts})
-
