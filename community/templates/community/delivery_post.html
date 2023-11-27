@@ -9,9 +9,11 @@
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
 
-        <table>
-            {{ form }}
-        </table>
+        {{ delivery_form.title }}
+        {{ delivery_form.content }}
+        {{ delivery_form.head_image }}
+        {{ delivery_form.file_upload }}
+        {{ delivery_form.category }}
 
         <button type="submit">Submit</button>
     </form>
