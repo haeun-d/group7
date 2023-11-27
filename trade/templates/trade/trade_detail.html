@@ -8,8 +8,7 @@
   <div class="card mx-auto mt-5" style="width: 18rem;">
     {% if post.head_image %}
       <img src="{{ post.head_image.url }}" height="200px" class="card-img-top">
-    {% else %}
-      <img src=".." class="card-img-top">
+
     {% endif %}
     <div class="card-body">
       <h5 class="card-title">{{ post.title }}</h5>
@@ -53,13 +52,10 @@
             <a href="{% url 'trade:review' post_id=post.pk %}" class="btn btn-success">후기 작성</a>
     {% endif %}
 
-    
 
-
-      {% else %}
       <!-- 기타 필요한 정보 추가 -->
       <a href="{% url 'trade:go-chat' post_id=post.pk %}" class="btn btn-primary">채팅하기</a>
-      {% endif %}
+
     </div>
   </div>
 </div>
