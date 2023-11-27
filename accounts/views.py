@@ -38,6 +38,10 @@ def logout_view(request):
 def mypage(request):
     return render(request, 'accounts/mypage.html')
 
+def review_make(request):
+    posts=Post.objects.filter(allowed_reviewer=request.user)
+    return render(request, 'accounts/review_list.html',{'posts':posts})
+
 def update_userinfo(request):
     if request.method=="POST":
         nickname=request.POST.get('nickname')
@@ -94,3 +98,4 @@ def leave_chat_room(request, room_id):
     chat_room=ChatRoom.objects.filter(id=room_id)
     chat_room.delete()
     return redirect('accounts:proceeding-chat')
+

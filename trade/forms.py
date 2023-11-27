@@ -20,8 +20,7 @@ class PostForm(forms.ModelForm):
 class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
-        fields = ['text', 'rating']
+        fields = ['rating']
         labels = {
-            'text': '후기 내용',
             'rating': '평가',
         }

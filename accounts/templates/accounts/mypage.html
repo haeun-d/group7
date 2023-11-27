@@ -43,6 +43,14 @@
     </div>
   </a>
   </div>
+
+  <div class="card mb-3">
+    <a style="text-decoration: none" href="{% url 'accounts:review-list' %}">
+    <div style="color:black" class="card-body">
+      작성할 수 있는 리뷰
+    </div>
+  </a>
+  </div>
   
   <div class="card mb-3">
     <a style="text-decoration: none" href="{% url 'accounts:proceeding-chat' %}">
@@ -60,5 +68,7 @@
   </div>
 </a>
 </div>
-
+{% for r in reviews %}
+{{r.title}}
+{% endfor %}
 {% endblock %}

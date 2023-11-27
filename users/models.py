@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
+from django.core.validators import MinValueValidator, MaxValueValidator
+
 
 class CustomUserManager(BaseUserManager):
     def _create_user(self, username, email, password, **extra_fields):
@@ -23,6 +25,8 @@ class User(AbstractUser):
     email = models.EmailField(max_length=30, unique=True, null=False, blank=False)
     nickname = models.CharField(max_length=20,unique=True)
     profile=models.ImageField(upload_to="profile/", null=True)
+    grade=models.FloatField(validators=[MinValueValidator(0), MaxValueValidator(5)], default=5 )
+    review_count=models.IntegerField(default=0)
     objects = CustomUserManager()
     def __str__(self):
         return self.username
