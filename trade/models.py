@@ -27,4 +27,4 @@ class Chatting(models.Model):
     chat_room=models.ForeignKey(ChatRoom, related_name="chat_room", on_delete=models.CASCADE )
     text=models.CharField(max_length=100)
     writer=models.ForeignKey(User, related_name='chatting_writer',on_delete=models.CASCADE)
-
+    created_at=models.DateTimeField(auto_now_add=True)
