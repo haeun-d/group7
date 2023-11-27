@@ -15,4 +15,5 @@ urlpatterns=[
     path('<int:pk>/chat/', views.chat, name='chat'),
     path('<int:pk>/like/', views.like_post, name='like_post'),
     path('liked/', views.liked_posts, name='liked_posts'),
+    path('<int:post_id>/review/', views.create_review, name='review'),
 ]

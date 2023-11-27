@@ -1,7 +1,7 @@
 from django.http import Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Post, Chatting, ChatRoom
-from .forms import PostForm
+from .forms import PostForm, ReviewForm
 from users.models import User
 
 def trade_first(request):
@@ -39,13 +39,32 @@ def edit_post(request, pk):
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES, instance=post)
         if form.is_valid():
+            allowed_reviewer_text = form.cleaned_data.get('allowed_reviewer_text')
+            post.allowed_reviewer = User.objects.filter(nickname=allowed_reviewer_text).first()
+
             form.save()
             return redirect('trade:trade_detail', pk=pk)
     else:
         form = PostForm(instance=post)
 
     return render(request, 'trade/trade_write.html', {'form': form})
-  
+
+def create_review(request, post_id):
+    post = get_object_or_404(Post, pk=post_id)
+
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.post = post
+            review.reviewer = request.user
+            review.save()
+            return redirect('trade:trade_detail', pk=post_id)
+    else:
+        form = ReviewForm()
+
+    return render(request, 'trade/review.html', {'form': form})
+
 def chat(request, pk):
     post = get_object_or_404(Post, pk=pk)
     # 처음 열었을 경우는 저장, 아니면 그냥 값 들고옴 
@@ -100,7 +119,6 @@ def like_post(request, pk):
     return redirect('trade:trade_detail', pk=pk)
 
 def liked_posts(request):
-    # 현재 로그인한 사용자가 찜한 글들을 가져옴
     liked_posts = request.user.liked_posts.all()
     return render(request, 'trade/liked_posts.html', {'liked_posts': liked_posts})
 

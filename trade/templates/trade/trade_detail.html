@@ -48,6 +48,10 @@
         </button>
       {% endif %}
 
+     <!-- 후기 작성 버튼-->
+    {% if request.user == post.allowed_reviewer %}
+            <a href="{% url 'trade:review' post_id=post.pk %}" class="btn btn-success">후기 작성</a>
+    {% endif %}
 
       <!-- 기타 필요한 정보 추가 -->
       <a href="{% url 'trade:go-chat' pk=post.pk %}" class="btn btn-primary">채팅하기</a>
