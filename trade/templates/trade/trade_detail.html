@@ -25,7 +25,7 @@
           {% csrf_token %}
           <button type="submit" class="btn btn-danger">글 삭제</button>
         </form>
-<<<<<<< HEAD
+
         <button>
           <a href="{% url 'trade:seller-chat' %}">
             내 채팅방 보기
@@ -33,13 +33,28 @@
         </button>
       {% endif %}
 
+     <!-- 찜하기 버튼 -->
+            <div class="btn-group">
+                <form method="post" action="{% url 'trade:like_post' pk=post.pk %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-success">
+                        {% if request.user in post.likes.all %}
+                            취소하기
+                        {% else %}
+                            찜하기
+                        {% endif %}
+                    </button>
+                </form>
+            </div>
+
+
      <!-- 후기 작성 버튼-->
     {% if request.user == post.allowed_reviewer %}
             <a href="{% url 'trade:review' post_id=post.pk %}" class="btn btn-success">후기 작성</a>
     {% endif %}
-=======
+
     
->>>>>>> 7cb100592e1b3d4d0f2fc351c819615fe321e77d
+
 
       {% else %}
       <!-- 기타 필요한 정보 추가 -->
