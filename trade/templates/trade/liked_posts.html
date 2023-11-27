@@ -13,7 +13,9 @@
             {% for post in liked_posts %}
                 <div class="col-md-4">
                     <div class="card mb-4">
+                        {% if post.head_image %}
                         <img src="{{ post.head_image.url }}" class="card-img-top" alt="Product Image">
+                        {% endif %}
                         <div class="card-body">
                             <h5 class="card-title">{{ post.title }}</h5>
                             <p class="card-text">{{ post.body }}</p>
