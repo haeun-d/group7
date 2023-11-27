@@ -6,7 +6,7 @@
 # 😎 개발팀원 소개 
 | <center> 김은서  </center> | <center>여지원 </center> | <center>장다연</center> | 
 | --- | --- | --- |
-| <center> <img width="150px" src="https://avatars.githubusercontent.com/u/128278212?v=4" /></center> | <center><img width="150px" src="https://soopool.art/image/acnh/animal/Flurry.png" /></center> | <center><img width="150px" src="https://soopool.art/image/acnh/animal/Apple.png" /></center> | 
+| <center> <img width="150px" src="https://soopool.art/image/acnh/animal/Kitty.png" /></center> | <center><img width="150px" src="https://soopool.art/image/acnh/animal/Flurry.png" /></center> | <center><img width="150px" src="https://soopool.art/image/acnh/animal/Apple.png" /></center> | 
 | <center>로그인, 금융, 지도 </center> | <center> 커뮤니티 </center> | <center> 중고거래 </center> |
 | [@7beunseo](https://github.com/7beunseo)  | [@yjwon6621](https://github.com/yjwon6621) |  [@noeyadd](https://github.com/noeyadd) |
 
@@ -38,7 +38,7 @@
 #### 중고 거래
   - 중고 상품을 올리고 수정 삭제할 수 있다
   - 소비자는 원하는 중고거래를 찜할 수 있다
-  - 중고 거래 희망을 원하는 사용자는 1:1 채팅 기능을 통해 판매자와 연락을 주고받는다
+  - 중고 거래 희망을 원하는 사용자는 중고 상품과 연결된 1:1 채팅 기능을 통해 판매자와 연락을 주고받는다
   - 소비자의 경우 마이페이지에서 내가 요청한 채팅을 모두 조회할 수 있다
   - 판매자의 경우 올린 상품에서 요청받은 채팅을 확인할 수 있다
   - 거래가 완료된 경우 판매자는 구매한 사용자의 닉네임을 입력하여 판매 완료 표시를 한다
@@ -47,7 +47,8 @@
   - 거래가 완료되면 진행했던 1:1 채팅방을 나갈 수 있다
 
 #### 커뮤니티  
-  - 
+  - 같이 배달시킬 사람, 여가생활이나 생필품 공동구매를 나눌 수 있는 카테고리로 분류된다
+  - 글 작성, 수정, 삭제가 가능하며 댓글을 남길 수 있다
 
 
 
@@ -85,7 +86,9 @@
 ### ✨ 개발환경에서의 실행 방법<br>
   ```
   $ cd group7
-  $ source venv/Scripts/activate 
+  $ python -m venv venv
+  $ source venv/Scripts/activate
+  $ pip install -r requirements.txt
   $ python manage.py makemigrations
   $ python manage.py migrate
   $ python manage.py migrate --run-syncdb
