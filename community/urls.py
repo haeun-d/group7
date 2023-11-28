@@ -7,7 +7,7 @@ app_name = 'community'
 urlpatterns = [
     #path('', views.PostList.as_view()),
     #path('<int:pk>/', views.PostDetail.as_view()),
-    path('community/',views.community_main, name="community-main"),
+    path('',views.community_main, name="community-main"),
     path('food/',food,name='food'),
     #path('food/',FoodListView.as_view(), name='food'),
     path('delivery/', delivery, name='delivery'),
@@ -24,8 +24,9 @@ urlpatterns = [
     path('search/',search,name='search'),
     path('search_delivery/',search_delivery,name='search-delivery'),
     path('ott/',ott,name='ott'),
-    path('detail/<int:pk>/', views.food_detail, name='food-detail'),
-    path('detail/<int:pk>/', views.delivery_detail,name='delivery-detail'),
+    path('food_detail/<int:pk>/', views.food_detail, name='food-detail'),
+    path('delivery_detail/<int:pk>/', views.delivery_detail,name='delivery-detail'),
     path('comment/<int:pk>/', comment, name='comment'),
+    path('comment_delivery<int:pk>/',comment_delivery,name='comment-delivery'),
 ]
 

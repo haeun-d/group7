@@ -29,7 +29,9 @@
           <div class="card-body">
             <h5 class="card-title">{{ post.title }}</h5>
             <p class="card-text" style="font-size: 14px">{{ post.content }}</p>
-            <a href="{% url 'community:delivery-detail' pk=post.pk %}" class="btn btn-primary">Read More</a>
+            <a href="{% url 'community:delivery-detail' pk=post.pk %}" class="btn btn-primary">
+              <button type="submit" class="btn-btn-lg btn-primary">Read More</button>
+            </a>
             <p class="text-right" style="font-size: 10px">{{ post.created_at }}</p>
           </div>
         </div>
