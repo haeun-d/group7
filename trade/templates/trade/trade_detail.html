@@ -1,13 +1,10 @@
 {% extends 'base.html' %}
-{% load static %}
 
 {% block title %}Product Detail{% endblock %}
 
 {% block content %}
 
-<a href="{% url 'trade:trade' %}">
-        <img src="{% static 'img/X.png' %}" alt="Back" style="width: 20px; height: 20px;">
-</a>
+<a href="{% url 'trade:trade' %}"><button type="button" class="btn-close m-2" aria-label="Close"></button></a>
 
 <div class="container">
   <div class="card mx-auto mt-5" style="width: 18rem;">
