@@ -18,17 +18,15 @@
       <p class="card-text">{{ post.body }}</p>
       <p class="card-text">Price: {{ post.price }}</p>
 
-    <!-- 수정 버튼 -->
-
-        <a href="{% url 'trade:edit_post' pk=post.pk %}" class="btn btn-warning">글 수정</a>
+      <a href="{% url 'trade:edit_post' pk=post.pk %}" class="btn btn-warning mb-2">글 수정</a>
 
       <!-- 삭제 버튼 -->
-        <form method="post" action="{% url 'trade:delete_post' pk=post.pk %}">
-          {% csrf_token %}
-          <button type="submit" class="btn btn-danger">글 삭제</button>
-        </form>
-        <button>
-          <a href="{% url 'accounts:seller-chat' post.id  %}">
+      <form method="post" action="{% url 'trade:delete_post' pk=post.pk %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger mb-2">글 삭제</button>
+      </form>
+        <button class=" btn btn-primary">
+          <a style="color:white; text-decoration: none;" href="{% url 'accounts:seller-chat' post.id  %}">
             열린 채팅방 보기
           </a>
         </button>

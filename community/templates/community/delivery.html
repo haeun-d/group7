@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block title %}공동구매해요{% endblock %}
 {% block content %}
-
+<a href="{% url 'community:community-main' %}"><button type="button" class="btn-close m-2" aria-label="Close"></button></a>
 <div>
 <a href="{% url 'community:category-delivery' category_delivery='daily' %}"><button type="button" class="btn btn-lg btn-primary" >생필품</button></a>
 <a href="{% url 'community:category-delivery' category_delivery='ott' %}"><button type="button" class="btn btn-lg btn-primary" >OTT</button></a>
@@ -29,9 +29,12 @@
           <div class="card-body">
             <h5 class="card-title">{{ post.title }}</h5>
             <p class="card-text" style="font-size: 14px">{{ post.content }}</p>
+            <a href="{% url 'community:delivery-detail' pk=post.pk %}" class="btn btn-primary">Read More</a>
+            <!--
             <a href="{% url 'community:delivery-detail' pk=post.pk %}" class="btn btn-primary">
               <button type="submit" class="btn-btn-lg btn-primary">Read More</button>
             </a>
+            -->
             <p class="text-right" style="font-size: 10px">{{ post.created_at }}</p>
           </div>
         </div>

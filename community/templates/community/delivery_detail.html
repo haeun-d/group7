@@ -21,7 +21,7 @@
     }
 
 </style>
-
+<a href="{% url 'community:delivery' %}"><button type="button" class="btn-close m-2" aria-label="Close"></button></a>
 <div class="container">
   <div class="card mx-auto mt-5" style="width: 18rem;">
     {% if post.head_image %}
@@ -58,10 +58,12 @@
   </div>
 </div>
 
+
+<!--Delete Post-->
 <div class="button-container">
 <div>
   {% if post.author == user %}
-    <form method="post" id="delete-post-form" action="{% url 'community:delete-post' pk=post.pk %}">
+    <form method="post" id="delete-post-form" action="{% url 'community:delete-delivery' pk=post.pk %}">
         {% csrf_token %}
         <button type="button" class="btn btn-danger" onclick="confirmDelete()">게시글 삭제</button>
     </form>
@@ -80,12 +82,15 @@
     }
   }
 </script>
-
+<!--Edit Post-->
 <div>
     {% if post.author == user %}
-        <a href="{% url 'community:edit-delivery' pk=post.pk %}" class="btn btn-primary">
-            <button type="submit" class="btn btn-lg btn-primary">수정하기</button>
+    <a href="{% url 'community:edit-delivery' pk=post.pk %}" class="btn btn-primary text-white">수정하기</a>
+    <!--
+        <a href="{% url 'community:edit-delivery' pk=post.pk %}" class="btn btn-lg btn-primary">
+            <button type="button" class="text-white">수정하기</button>
         </a>
+        -->
     {% endif %}
 </div>
 </div>

@@ -39,7 +39,7 @@ def mypage(request):
     return render(request, 'accounts/mypage.html')
 
 def review_make(request):
-    posts=Post.objects.filter(allowed_reviewer=request.user)
+    posts=Post.objects.filter(allowed_reviewer=request.user).order_by('-id')
     return render(request, 'accounts/review_list.html',{'posts':posts})
 
 def update_userinfo(request):
