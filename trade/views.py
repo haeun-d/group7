@@ -25,10 +25,8 @@ def trade_detail(request, pk):
     find_review=Review.objects.filter(post=post,reviewer=request.user )
 
     # 이미 후기가 존재한다면 후기를 남기지 못하도록 한정
-    if find_review!=None:
-        review_exists=True
-    else:
-        review_exists=False
+
+    review_exists = find_review.exists()
     return render(request, 'trade/trade_detail.html', {'post': post,'review_exists':review_exists})
 
 def delete_post(request, pk):
