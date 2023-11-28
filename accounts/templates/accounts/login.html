@@ -8,7 +8,7 @@
     {% csrf_token %}
     <div>
         <div class="input-group my-3">
-            <span  class="input-group-text"> 아이디 : </span>
+            <span  class="input-group-text"> 아이디  </span>
             {{ form.username|add_class:"form-control" }}
             {% if form.username.errors %}
             <script>
@@ -18,7 +18,7 @@
         </div>
 
         <div class="input-group my-3">
-            <span  class="input-group-text"> 비밀번호 :  </span>
+            <span  class="input-group-text"> 비밀번호   </span>
             {{ form.password|add_class:"form-control" }}
             {% if form.password.errors %}
             <script>

@@ -90,38 +90,39 @@
                                             <p class="card-title"><span style="background-color: aliceblue" > 구매 : {{ r.name|truncatechars:6 }}</span></p>
                                         </div>
                                         <div class="col-6">
-                                            <p class="card-subtitle mb-2 text-muted">가격 - {{ r.price |truncatechars:6}}원</p>
+                                            <p class="card-subtitle mb-2 text-muted" style="text-align: right;">가격 - {{ r.price |truncatechars:6}}원</p>
                                         </div>
+                                        
                                     </div>
                                     <div class="row"> 
                                         <div class="col-8">
-                                            <p class="card-text">목적 - {{ r.purpose |truncatechars:10}}</p>
+                                            <p class="card-text">{{ r.detail |truncatechars:10}}</p>
                                         </div>
-                                        <div class="col-4">
+                                        <div class="col-4" style="text-align: right;">
                                             {% if nickname == request.user.nickname %}
-                                            공개 : 
-                                            
+                                                공개 : 
                                                 {% if r.share %}
-                                                <i class="fas fa-check-square"></i>
+                                                    <i style="text-align: right;" class="fas fa-check-square"></i>
                                                 {% else %}
-                                                <i class="fas fa-times"></i>                                                
-                                                {% endif %}
-                                            
+                                                    <i style="text-align: right;" class="fas fa-times"></i>                                                
+                                                
+                                            {% endif %}
                                         </div>
+                                        
                                         <div class="row mt-3"> 
                                             <div class="col-9">
                                                 {% if nickname == request.user.nickname %}
                                                     <a style="text-decoration: none;" href="{% url 'consumption:consumption-detail' pk=r.pk %}" class="card-link">view more</a>
                                                 {% endif %}
                                             </div>
-                                            <div class="col-3">
-                                                <span style="color: red;"> ♥ </span>{{ r.likes }}
+                                            <div class="col-3" style="text-align: right;">
+                                                <span style="color: red; text-align: right;"> ♥ </span>{{ r.likes }}
                                             </div>
                                             {% else %}
                                                 {% if request.user in r.like_user.all %}
-                                                    <a href="{% url 'consumption:like'  r.id %}" style="color:black; text-decoration: none;"><span style="color: red;"> ♥ </span>{{ r.likes }}</a>
+                                                    <a href="{% url 'consumption:like'  r.id %}" style="color:black; text-decoration: none; text-align: right;"><span style="color: red;"> ♥ </span>{{ r.likes }}</a>
                                                 {% else %}
-                                                    <a href="{% url 'consumption:like' r.id %}" style="color:black; text-decoration: none;"><span style="color: red;"> ♡ </span>{{ r.likes }}</a>
+                                                    <a href="{% url 'consumption:like' r.id %}" style="color:black; text-decoration: none; text-align: right;"><span style="color: red;"> ♡ </span>{{ r.likes }}</a>
                                                 {% endif %}
                                             {% endif %}
                                         </div>

@@ -4,8 +4,9 @@
 {% block title %}마이페이지{% endblock %}
 
 {% block content %}
-<h2  class="mt-3"><span style="background-color:aliceblue" >회원정보</span></h2>
-<div class="card mb-3" >
+<h2 class="mt-3">
+  <span style="background-color: aliceblue; border-radius: 10px;" class="mt-4">회원정보</span>
+</h2><div class="card mb-3" >
     <a style="text-decoration: none" href="{% url 'accounts:logout' %}">
     <div style="color:black" class="card-body">
       로그아웃
@@ -19,7 +20,9 @@
     </div>
 </a>
   </div>
-  <h2 class="mt-3"><span style="background-color:aliceblue" >중고거래</span></h2>
+  <h2 class="mt-3">
+  <span style="background-color: aliceblue; border-radius: 10px;" class="mt-4">중고거래</span>
+</h2>
   <div class="card mb-3">
     <a style="text-decoration: none" href="{% url 'trade:liked_posts' %}">
     <div style="color:black" class="card-body">
@@ -51,9 +54,10 @@
     </div>
   </a>
   </div>
-
-  <h2 class="mt-3"><span style="background-color:aliceblue" >제휴</span></h2>
-<div class="card mb-3">
+  <h2 class="mt-3">
+  <span style="background-color: aliceblue; border-radius: 10px;" class="mt-4">제휴</span>
+</h2>
+  <div class="card mb-3">
   <a style="text-decoration: none" href="{% url 'accounts:map-scrap' %}">
   <div style="color:black" class="card-body">
     스크랩한 제휴 정보

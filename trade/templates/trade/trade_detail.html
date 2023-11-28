@@ -49,13 +49,13 @@
                 </form>
             </div>
 
+<!-- 기타 필요한 정보 추가 -->
+<a href="{% url 'trade:go-chat' post_id=post.pk %}" class="btn btn-primary">채팅하기</a>
 
      <!-- 후기 작성 버튼-->
     {% if request.user == post.allowed_reviewer %}
 
-    <!-- 기타 필요한 정보 추가 -->
-    <a href="{% url 'trade:go-chat' post_id=post.pk %}" class="btn btn-primary">채팅하기</a>
-
+    
     <!--후기를 작성했다면 더이상 등록하지 못하도록-->
     {% if not review_exists %}
             <a href="{% url 'trade:review' post_id=post.pk %}" class="btn btn-success">후기 작성</a>
