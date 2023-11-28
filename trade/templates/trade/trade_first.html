@@ -9,10 +9,17 @@
     <!-- 중고거래 물품 업로드 카드 -->
     {% for post in posts %}
         <div class="card mx-3 mb-3" style="width: 18rem;">
+
+          <!-- 만약 글쓴이가 후기 작성자를 정했다면 [판매완료]가 뜨도록 -->
+          {% if post.allowed_reviewer %}
+          <br><h3>[판매완료]</h3><br>
+          {% endif %}
+
           {% if post.head_image %}
             <img src="{{ post.head_image.url }}" class="card-img-top">
 
           {% endif %}
+
           <div class="card-body">
             <h5 class="card-title">{{ post.title }}</h5>
             <p class="card-text">{{ post.body }}</p>
