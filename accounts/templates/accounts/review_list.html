@@ -8,14 +8,18 @@
 
 {% for p in posts %}
 
-<div class="card mb-3">
+<div class="card mb-1">
     <div style="color:black" class="card-body">
-        물건-{{p.title}}<br>
+        <a style="text-decoration: none" href="{% url 'trade:trade_detail' p.id %}">상품-{{p.title}}<br>
         판매자 - {{p.author.nickname}}</a>
     </div>
-    <a style="text-decoration: none" href="{% url 'trade:trade_detail' p.id %}">
-        <button type="button" class="btn btn-outline-primary m-3">리뷰 남기기</button>
-    </a>
+    {% for review in p.post_review.all %}
+    {% if review.reviewer.id == request.user.id %}
+    <button type="button" class="btn btn-outline-primary m-3">이미 작성함</button>
+{% endif %}
+  {% endfor %}
+  
+ 
   </div>
   
 

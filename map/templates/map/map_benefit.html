@@ -60,8 +60,9 @@
         var marker = new kakao.maps.Marker({
             map: map,
             position: locPosition,
-            image: markerImage
+            //image: markerImage
         });
+
         var iwContent = message, // 인포윈도우에 표시할 내용
             iwRemoveable = true;
         // 인포윈도우를 생성합니다
@@ -81,6 +82,7 @@
 
     console.log(latitudes);
     console.log(longitudes);
+    
     console.log(names);
 
     // 마커 생성 및 지도에 표시
@@ -89,7 +91,7 @@
             map: map,
             position: new kakao.maps.LatLng(parseFloat(latitudes[i]), parseFloat(longitudes[i])),
             title: names[i],
-            image: markerImage
+            //image: markerImage
         });
 
         var infowindow = new kakao.maps.InfoWindow({

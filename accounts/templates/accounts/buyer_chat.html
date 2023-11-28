@@ -14,8 +14,9 @@
         사려는 물건-{{c.post.title}}<br>
         판매자 - {{c.seller.nickname}}</a>
     </div>
-    <button  type="button" class="btn btn-outline-primary"><a style=" text-decoration: none; display: inline-block;" href="{% url 'accounts:leave-chat-room' c.id %}">채팅방 나가기</a></button>
-</a>
+    <a style="text-decoration: none" href="{% url 'accounts:leave-chat-room' c.id %}">
+        <button style="color:black" type="button" class="btn btn-outline-primary m-3">채팅방 나가기</button>
+    </a>
   </div>
   
 

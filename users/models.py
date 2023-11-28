@@ -26,7 +26,7 @@ class User(AbstractUser):
     nickname = models.CharField(max_length=20,unique=True)
     profile=models.ImageField(upload_to="profile/", null=True)
     grade=models.FloatField(validators=[MinValueValidator(0), MaxValueValidator(5)], default=5 )
-    review_count=models.IntegerField(default=0)
+    review_count=models.IntegerField(default=1)
     objects = CustomUserManager()
     def __str__(self):
         return self.username

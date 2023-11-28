@@ -31,7 +31,7 @@ class Chatting(models.Model):
     created_at=models.DateTimeField(auto_now_add=True)
 
 class Review(models.Model):
-    post = models.ForeignKey('Post', on_delete=models.CASCADE)
+    post = models.ForeignKey('Post', related_name='post_review', on_delete=models.CASCADE)
     reviewer = models.ForeignKey(User, on_delete=models.CASCADE)
     text = models.TextField()
     rating = models.PositiveIntegerField(default=5)  # 1에서 5까지의 평가를 가정합니다.
