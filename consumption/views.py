@@ -148,7 +148,7 @@ def calender(request):
 def delete(request, id):
     record=get_object_or_404(Record, id=id)
     record.delete()
-    return redirect('consumption:onsumption', request.user.nickname)
+    return redirect('consumption:consumption', request.user.nickname)
 
 # 팔로잉한 친구 조회 
 def friend(request):

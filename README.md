@@ -27,8 +27,8 @@
 
 #### 2️⃣ 금융 기록 <br>
 
-<img width="200" height="420" alt="image" src="https://github.com/InternetProgramming7/group7/assets/128278212/fc701464-5139-45b5-8f40-d1704a5ca8be">
-<img width="200" height="420" src="https://github.com/InternetProgramming7/group7/assets/128278212/0e7094df-9dbb-4145-ab65-566060da6164">
+<img width="200" height="420" alt="image" src="https://github.com/InternetProgramming7/group7/assets/128278212/83a6e064-e8e0-4587-b3ea-94bed39e0041">
+<img width="200" height="420" alt="image" src="https://github.com/InternetProgramming7/group7/assets/128278212/d92f4c69-69ba-4568-aef6-0d97c1d51747">
 <img width="200" height="420" alt="image" src="https://github.com/InternetProgramming7/group7/assets/128278212/06ef1a06-0132-4da9-8ca5-8d29f5f2e04c">
 <img width="200" height="420" alt="image" src="https://github.com/InternetProgramming7/group7/assets/128278212/b093826c-72e2-4474-8c9b-0c90973510b2">
 
