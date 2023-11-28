@@ -11,6 +11,14 @@ class Comment(models.Model):
     def __str__(self):
         return self.text
 
+class CommentDelivery(models.Model):
+    post=models.ForeignKey('community.Delivery', on_delete=models.CASCADE, related_name='comments_delivery')
+    author=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="comment_delivery")
+    text=models.TextField()
+    created_at=models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return self.text
+
 class Post(models.Model):
     CATEGORY_CHOICES=[
         ('food','Food'),
@@ -47,7 +55,7 @@ class Delivery(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     head_image = models.ImageField(upload_to='community/images/%Y/%m/%d/', blank=True)
     file_upload = models.FileField(upload_to='community/files/%Y/%m/%d/', blank=True)
-    category=models.CharField(max_length=20, choices=CATEGORY_CHOICES, default='food')
+    category_delivery=models.CharField(max_length=20, choices=CATEGORY_CHOICES, default='daily')
     community=models.CharField(max_length=20)
     def __str__(self):
         return f'[{self.pk}]{self.title}'

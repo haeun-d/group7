@@ -33,7 +33,7 @@
       <h4 class="card-title">{{ post.title }}</h4>
       <p class="card-text">{{ post.content }}</p>
       <p class="card-text" style="font-size:10px">{{ post.created_at }}</p>
-      <p class="card-text" style="font-size:10px">Category: {{ post.get_category_display }}></p>
+      <p class="card-text" style="font-size:10px">Category: {{ post.category_delivery }}</p>
     </div>
   </div>
 </div>
@@ -44,13 +44,13 @@
   <h3>Comment</h3>
   <br>
   <div>
-  {%  for comment in comments %}
+  {%  for comment in comments_delivery %}
        <p>{{ comment.text }}-{{ comment.author }}-{{ comment.created_at }}</p>
   {% endfor %}
   </div>
 
   <div>
-  <form method="post" action="{% url 'community:comment' pk=post.pk %}">
+  <form method="post" action="{% url 'community:comment-delivery' pk=post.pk %}">
       {% csrf_token %}
       {{ comment_form.as_p }}
       <button type="submit">댓글 남기기</button>

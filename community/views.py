@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Post, Comment, Delivery
-from .forms import PostForm, CommentForm, PostDelivery
+from .models import Post, Comment, Delivery, CommentDelivery
+from .forms import PostForm, CommentForm, PostDelivery, CommentDeliveryForm
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def community_main(request):
@@ -49,7 +49,7 @@ def category_posts(request, category):
     return render(request, 'community/category_posts.html',{'posts':posts,'category':category})
 
 def category_delivery(request, category_delivery):
-    posts = Post.objects.filter(category=category_delivery).order_by('-created_at')
+    posts = Delivery.objects.filter(category_delivery=category_delivery).order_by('-created_at')
 
     return render(request, 'community/category_delivery.html',{'posts':posts,'category_delivery':category_delivery})
 
@@ -129,8 +129,8 @@ def food_detail(request, pk):
     return render(request, 'community/food_detail.html', {'post': post})
 
 def delivery_detail(request,pk):
-    post=get_object_or_404(Post, pk=pk)
-    return render(request, 'community/delivery_detail.html',{'post':post})
+    post = get_object_or_404(Delivery, pk=pk)
+    return render(request, 'community/delivery_detail.html',{'post': post})
 
 def ott(request):
     return render(request, 'community/ott.html')
@@ -175,6 +175,23 @@ def comment(request, pk):
         else:
             comment_form=CommentForm()
         return render(request, 'community/food_detail.html',{'post': post, 'comments':comments, 'comment_form':comment_form})
+
+def comment_delivery(request, pk):
+    post=get_object_or_404(Delivery, pk=pk)
+    comments_delivery=CommentDelivery.objects.filter(post=post)
+
+    if request.method=='POST':
+        comment_form=CommentDeliveryForm(request.POST)
+        if comment_form.is_valid():
+            new_comment=comment_form.save(commit=False)
+            new_comment.post=post
+            new_comment.author=request.user
+            new_comment.save()
+            return redirect('community:delivery-detail', pk=pk)
+        else:
+            comment_form = CommentDeliveryForm()
+
+        return render(request, 'community/delivery_detail.html',{'post': post, 'comments_delivery': comments_delivery, 'comment_form': comment_form})
 
 
 #class PostList(ListView):
