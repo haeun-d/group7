@@ -2,10 +2,8 @@
 {% block title %}카테고리 게시글 - {{ category }}{% endblock %}
 
 {% block content %}
+<a href="{% url 'community:food' %}"><button type="button" class="btn-close m-2" aria-label="Close"></button></a>
   <div class="container">
-    <div>
-      <button id="back-to-food" class="btn btn-secondary">X</button>
-    </div>
     <h2>{{ category }} 카테고리 게시글</h2>
     <hr>
     <div class="row justify-content-center">

@@ -34,14 +34,6 @@ def food(request):
         # 페이지가 비어 있는 경우, 마지막 페이지를 반환합니다.
         posts = paginator.page(paginator.num_pages)
     return render(request, 'community/food.html', {'posts': posts})
-'''
-class FoodListView(ListView):
-    model=Post
-    template_name='community/food,html'
-    context_objects_name='posts'
-    paginate_by=5
-    ordering=['-created_at']
-'''
 
 def category_posts(request, category):
     posts = Post.objects.filter(category=category).order_by('-created_at')
@@ -52,14 +44,6 @@ def category_delivery(request, category_delivery):
     posts = Delivery.objects.filter(category_delivery=category_delivery).order_by('-created_at')
 
     return render(request, 'community/category_delivery.html',{'posts':posts,'category_delivery':category_delivery})
-
-
-#def food_post(request):
-#    posts=Post.objects.all()
-#    return render(request,'community/food.html',{'posts':posts})
-#def delivery_post(request):
-#    posts=Post.objects.all()
-#    return render(request, 'community/delivery.html',{'posts':posts})
 
 def create_post(request):
     if request.method == 'POST':
@@ -91,6 +75,14 @@ def delete_post(request,pk):
 
     return redirect('community:food')
 
+def delete_delivery(request,pk):
+    post=get_object_or_404(Delivery,pk=pk)
+
+    if request.user==post.author:
+        post.delete()
+
+    return redirect('community:delivery')
+
 def edit_post(request, pk):
     post = get_object_or_404(Post, pk=pk)
 
@@ -119,7 +111,7 @@ def edit_delivery(request, pk):
             delivery_form.save()
             return redirect('community:delivery-detail', pk=post.pk)
     else:
-        delivery_form = PostDelivery(instance=post)
+        delivery_form = PostDelivery(instance=post, user=request.user)
 
     return render(request, 'community/edit_delivery.html', {'delivery_form': delivery_form, 'post':post})
 
@@ -132,8 +124,10 @@ def delivery_detail(request,pk):
     post = get_object_or_404(Delivery, pk=pk)
     return render(request, 'community/delivery_detail.html',{'post': post})
 
+'''
 def ott(request):
     return render(request, 'community/ott.html')
+'''
 
 def search(request):
     query=request.GET.get('q')
@@ -192,11 +186,3 @@ def comment_delivery(request, pk):
             comment_form = CommentDeliveryForm()
 
         return render(request, 'community/delivery_detail.html',{'post': post, 'comments_delivery': comments_delivery, 'comment_form': comment_form})
-
-
-#class PostList(ListView):
-#    model = Post
-#    ordering = '-created_at'
-
-#class PostDetail(DetailView):
-#    model = Post
