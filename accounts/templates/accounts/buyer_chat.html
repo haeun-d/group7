@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 
-
 {% block title %}구매자 채팅방{% endblock %}
 
 {% block content %}
@@ -10,15 +9,33 @@
 
 <div class="card mb-3">
     <a style="text-decoration: none" href="{% url 'trade:chating' c.post.id  c.id %}">
-    <div style="color:black" class="card-body">
-        사려는 물건-{{c.post.title}}<br>
-        판매자 - {{c.seller.nickname}}</a>
+        <div style="color:black" class="card-body">
+            사려는 물건-{{c.post.title}}<br>
+            판매자 - {{c.seller.nickname}}</a>
+        </div>
+        <a href="#" class="leave-chat-room" data-chatroom-id="{{ c.id }}">
+            <button style="color:black" type="button" class="btn btn-outline-primary m-3">채팅방 나가기</button>
+        </a>
+        <script>
+            // Add event listener to handle leaving chat room confirmation
+            document.addEventListener('DOMContentLoaded', function () {
+                var leaveButtons = document.querySelectorAll('.leave-chat-room');
+        
+                leaveButtons.forEach(function (button) {
+                    button.addEventListener('click', function (event) {
+                        event.preventDefault();
+        
+                        var chatRoomId = button.getAttribute('data-chatroom-id');
+                        var confirmation = confirm('채팅방을 나가시겠습니까?');
+        
+                        if (confirmation) {
+                            window.location.href = `{% url 'accounts:leave-chat-room' c.id %}`;
+                        }
+                    });
+                });
+            });
+        </script>
     </div>
-    <a style="text-decoration: none" href="{% url 'accounts:leave-chat-room' c.id %}">
-        <button style="color:black" type="button" class="btn btn-outline-primary m-3">채팅방 나가기</button>
-    </a>
-  </div>
-  
 
 {% endfor %}
 
