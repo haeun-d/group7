@@ -21,7 +21,7 @@
           {% endif %}
 
           <div class="card-body">
-            <h5 class="card-title">{{ post.title }}</h5>
+            <h5 class="card-title"><strong>{{ post.title }}</strong></h5>
             <p class="card-text">{{ post.body }}</p>
             <a href="{% url 'trade:trade_detail' pk=post.pk %}" class="btn btn-primary">상세 보기</a>
           </div>
