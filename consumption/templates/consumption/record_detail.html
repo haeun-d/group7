@@ -1,26 +1,36 @@
 {% extends 'base.html' %}
 
-
 {% block title %}여기에 제목을 써주세요{% endblock %}
 
 {% block content %}
-
 <div class="container-fluid card">
-    <a href="{% url 'consumption:consumption' request.user.nickname %}"><button type="button" class="btn-close m-3" aria-label="Close"></button></a>
+    <a href="{% url 'consumption:consumption' request.user.nickname %}">
+        <button type="button" class="btn-close m-3" aria-label="Close"></button>
+    </a>
 
-  <strong class="mt-5"><h1>알찬소 영수증</h1></strong>
+    <strong class="mt-5"><h1>알찬소 영수증</h1></strong>
     <div class="container card-body">
-      <h1 class="card-title">{{record.year}} / {{record.month}} / {{record.date}} </h1>
-      <h2 class="card-text my-5">가격 : {{record.price}}</h2>
-      <p class="card-text">구매 상품 : {{record.name}}</p>
-      <p class="card-text">구매 목적 : {{record.purpose}}</p>
-      <p class="card-text mb-5">상세 설명 : {{record.detail}}</p>
-      <a href="{% url 'consumption:calender-update' record.id %}"><button type="button" class="btn btn-primary btn-lg">수정하기</button></a>
-      <a href="{% url 'consumption:record-delete' record.id %}"><button type="button" class="btn btn-primary btn-lg">삭제하기</button></a>
+        <h1 class="card-title">{{record.year}} / {{record.month}} / {{record.date}} </h1>
+        <h2 class="card-text my-5">가격 : {{record.price}}</h2>
+        <p class="card-text">구매 상품 : {{record.name}}</p>
+        <p class="card-text">구매 목적 : {{record.purpose}}</p>
+        <p class="card-text mb-5">상세 설명 : {{record.detail}}</p>
+        <a href="{% url 'consumption:calender-update' record.id %}">
+            <button type="button" class="btn btn-primary btn-lg">수정하기</button>
+        </a>
+
+        <button type="button" class="btn btn-primary btn-lg" id="deleteRecordBtn">삭제하기</button>
+
+        <script>
+            document.getElementById('deleteRecordBtn').addEventListener('click', function () {
+                var confirmation = confirm('정말 삭제하시겠습니까?');
+                
+                if (confirmation) {
+                    window.location.href = `{% url 'consumption:record-delete' record.id %}`;
+                }
+            });
+        </script>
+
     </div>
-
-  </div>
-
-
-
+</div>
 {% endblock %}
