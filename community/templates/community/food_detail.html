@@ -46,7 +46,12 @@
   <br>
   <div>
   {%  for comment in comments %}
-       <p>{{ comment.text }}-{{ comment.author }}-{{ comment.created_at }}</p>
+       <p>
+           {{ comment.text }}-{{ comment.author }}-{{ comment.created_at }}
+           {% if comment.author == user %}
+           <a href="{% url 'community:delete-comment' pk=comment.pk %}">삭제</a>
+           {% endif %}
+       </p>
   {% endfor %}
   </div>
 

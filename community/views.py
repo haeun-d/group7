@@ -186,3 +186,21 @@ def comment_delivery(request, pk):
             comment_form = CommentDeliveryForm()
 
         return render(request, 'community/delivery_detail.html',{'post': post, 'comments_delivery': comments_delivery, 'comment_form': comment_form})
+
+
+def delete_comment(request,pk):
+    comment=get_object_or_404(Comment, pk=pk)
+
+    if comment.author==request.user:
+        comment.delete()
+
+    return redirect('community:food-detail',pk=comment.post.pk)
+
+def delete_deliverycomment(request,pk):
+    comment=get_object_or_404(CommentDelivery, pk=pk)
+
+    if comment.author==request.user:
+        comment.delete()
+
+    return redirect('community:delivery-detail',pk=comment.post.pk)
+
