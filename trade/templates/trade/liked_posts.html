@@ -13,6 +13,10 @@
             {% for post in liked_posts %}
                 <div class="col-md-4">
                     <div class="card mb-4">
+                        <!-- 만약 글쓴이가 후기 작성자를 정했다면 [판매완료]가 뜨도록 -->
+                        {% if post.allowed_reviewer %}
+                        <br><h3 style="text-align: center;"><strong>[판매완료]</strong></h3>
+                        {% endif %}
                         {% if post.head_image %}
                         <img src="{{ post.head_image.url }}" class="card-img-top" alt="Product Image">
                         {% endif %}
