@@ -66,9 +66,10 @@ def create_review(request, post_id):
             review.reviewer = request.user
             # 전체 리뷰 수 증가
             post.author.review_count+=1
+
             post.author.save()
             # 평점 계산
-            post.author.grade=(post.author.grade+review.rating)/post.author.review_count
+            post.author.grade=(post.author.grade*(post.author.review_count-1)+review.rating)/post.author.review_count
             review.save()
             post.author.save()
             return redirect('trade:trade_detail', pk=post_id)
@@ -98,6 +99,7 @@ def chat(request, post_id):
     )
     return redirect('trade:chating', post_id, chat_room.id)
 
+# 채팅방으로 들어감
 def into_chatroom(request, post_id, chatroom_id):
     chat_room=get_object_or_404(ChatRoom, id=chatroom_id)
 
@@ -113,6 +115,7 @@ def into_chatroom(request, post_id, chatroom_id):
     chats=Chatting.objects.filter(chat_room=chat_room)
     return render(request, 'trade/chat.html', {'chats': chats})
 
+# 판매자가 채팅 조회
 def seller_chat(request):
     chat_room=ChatRoom.objects.filter(seller=request.user)
     return render(request, 'trade/seller_chat.html',{'chat_room':chat_room})
@@ -120,6 +123,7 @@ def seller_chat(request):
 
     return render(request, 'trade/trade_chat.html', {'post': post})
 
+# 찜하기 
 def like_post(request, pk):
     post = get_object_or_404(Post, pk=pk)
 
