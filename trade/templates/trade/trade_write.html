@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load widget_tweaks %}
 {% block title %}중고거래 물품 글쓰기{% endblock %}
 
 {% block content %}
@@ -7,9 +7,60 @@
 
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <table>
-            {{ form.as_table }}
-        </table>
+        <div class="input-group my-3">
+            <span class="input-group-text"> 제목  </span>
+            {{ form.title|add_class:"form-control" }}
+            {% if form.title.errors %}
+            <script>
+              alert("{{ form.title.errors.as_text }}");
+          </script>
+            {% endif %}
+        </div>
+        <div class="input-group my-3">
+            <span class="input-group-text"> 상세설명  </span>
+            {{ form.body|add_class:"form-control" }}
+            {% if form.body.errors %}
+            <script>
+              alert("{{ form.body.errors.as_text }}");
+          </script>
+            {% endif %}
+        </div>
+        <div class="input-group my-3">
+            <span class="input-group-text"> 이미지  </span>
+            {{ form.head_image|add_class:"form-control" }}
+            {% if form.head_image.errors %}
+            <script>
+              alert("{{ form.head_image.errors.as_text }}");
+          </script>
+            {% endif %}
+        </div>
+        <div class="input-group my-3">
+            <span class="input-group-text"> 가격  </span>
+            {{ form.price|add_class:"form-control" }}
+            {% if form.price.errors %}
+            <script>
+              alert("{{ form.price.errors.as_text }}");
+          </script>
+            {% endif %}
+        </div>
+        <div class="input-group my-3">
+            <span class="input-group-text"> 만날 장소  </span>
+            {{ form.place|add_class:"form-control" }}
+            {% if form.place.errors %}
+            <script>
+              alert("{{ form.place.errors.as_text }}");
+          </script>
+            {% endif %}
+        </div>
+        <div class="input-group my-3">
+            <span class="input-group-text"> 구매자 닉네임  </span>
+            {{ form.allowed_reviewer_text|add_class:"form-control" }}
+            {% if form.allowed_reviewer_text.errors %}
+            <script>
+              alert("{{ form.allowed_reviewer_text.errors.as_text }}");
+          </script>
+            {% endif %}
+        </div>
         <button type="submit">글 등록하기</button>
     </form>
 {% endblock %}
