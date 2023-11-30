@@ -76,7 +76,7 @@ def create_review(request, post_id):
     else:
         form = ReviewForm()
 
-    return render(request, 'trade/review.html', {'form': form})
+    return render(request, 'trade/review.html', {'form': form,'post':post})
 
 def chat(request, pk):
     post = get_object_or_404(Post, pk=pk)
