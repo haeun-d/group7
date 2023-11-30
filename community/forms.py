@@ -14,7 +14,7 @@ class CommentDeliveryForm(forms.ModelForm):
 class PostForm(forms.ModelForm):
     class Meta:
         model=Post
-        fields=['title', 'content','head_image','file_upload','category']
+        fields=['title', 'content','head_image','file_upload','category','author']
 
     def __init__(self, *args, **kwargs):
         # Get the user from the form's kwargs
