@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 {% block title %}Search{% endblock %}
 {% block content %}
+<a href="{% url 'community:delivery' %}"><button type="button" class="btn-close m-2" aria-label="Close"></button></a>
     <h2>Search Results for "{{ query }}"</h2>
+
 <hr>
 <br>
     {% if posts %}
