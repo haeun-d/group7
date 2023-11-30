@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+
+{% block title %}여기에 제목을 써주세요{% endblock %}
+
+{% block content %}
+{% include 'accounts/community_nav.html' %}
+<script>
+    let nav=document.getElementById("food");
+    nav.style.fontSize="30px";
+    // nav.style.color=blue;
+    nav.style.color = 'steelblue';
+</script>
+<div class="row">
+    {% for m in posts %}
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+
+                <h1 class="card-title">{{m.title}}
+                    
+                </h1>
+            </div>
+
+
+   
+          
+        <a  href="{% url 'community:food-detail' m.pk %}" class="btn btn-outline-dart btn-block btn-sm btn-primary m-3">view more</a>
+   
+    <div style="font-size:20px; color:steelblue; text-decoration:none;"  class="col-5">
+
+ </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+{% endblock %}
