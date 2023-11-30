@@ -47,10 +47,13 @@ def category_delivery(request, category_delivery):
 
 def create_post(request):
     if request.method == 'POST':
-        form = PostForm(request.POST, user=request.user)
+        form = PostForm(request.POST, request.FILES, user=request.user)
         if form.is_valid():
-            form.instance.author = request.user
-            form.save()
+            #form.instance.author = request.user
+            #form.save()
+            post = form.save(commit=False)
+            post.author = request.user
+            post.save()
             return redirect('community:food')
     else:
         form = PostForm(user=request.user)
@@ -58,10 +61,13 @@ def create_post(request):
 
 def delivery_post(request):
     if request.method == 'POST':
-        delivery_form = PostDelivery(request.POST)
+        delivery_form = PostDelivery(request.POST, request.FILES, user=request.user)
         if delivery_form.is_valid():
-            delivery_form.instance.author = request.user
-            delivery_form.save()
+            #delivery_form.instance.author = request.user
+            #delivery_form.save()
+            post = delivery_form.save(commit=False)
+            post.author = request.user
+            post.save()
             return redirect('community:delivery')
     else:
         delivery_form = PostDelivery(user=request.user)
