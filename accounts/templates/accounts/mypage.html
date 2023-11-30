@@ -4,6 +4,25 @@
 {% block title %}마이페이지{% endblock %}
 
 {% block content %}
+
+<style>
+  /* 애니메이션 스타일 */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .fadeIn {
+    animation: fadeIn 1s ease-out;
+  }
+</style>
+
 <h2 class="mt-3">
   <span style="background-color: aliceblue; border-radius: 10px;" class="mt-4">회원정보</span>
 </h2><div class="card mb-3" >
@@ -64,7 +83,4 @@
   </div>
 </a>
 </div>
-{% for r in reviews %}
-{{r.title}}
-{% endfor %}
 {% endblock %}

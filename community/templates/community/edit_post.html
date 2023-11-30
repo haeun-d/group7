@@ -1,11 +1,56 @@
 {% extends 'base.html' %}
+{% load widget_tweaks %}
 {% block title %}같이 밥 먹어요{% endblock %}
 
 {% block content %}
 <h2>Edit Post</h2>
 <form method="post" action="{% url 'community:edit-post' pk=post.pk %}">
     {% csrf_token %}
-    {{ form.as_p }}
+    <div class="input-group my-3">
+        <span class="input-group-text"> 제목  </span>
+        {{ form.title|add_class:"form-control" }}
+        {% if form.title.errors %}
+        <script>
+          alert("{{ form.title.errors.as_text }}");
+      </script>
+        {% endif %}
+    </div>
+    <div class="input-group my-3">
+        <span class="input-group-text"> 내용  </span>
+        {{ form.content|add_class:"form-control" }}
+        {% if form.content.errors %}
+        <script>
+          alert("{{ form.content.errors.as_text }}");
+      </script>
+        {% endif %}
+    </div>
+    <div class="input-group my-3">
+        <span class="input-group-text"> 이미지 </span>
+        {{ form.head_image|add_class:"form-control" }}
+        {% if form.head_image.errors %}
+        <script>
+          alert("{{ form.head_image.errors.as_text }}");
+      </script>
+        {% endif %}
+    </div>
+    <div class="input-group my-3">
+        <span class="input-group-text"> 파일업로드  </span>
+        {{ form.file_upload|add_class:"form-control" }}
+        {% if form.file_upload.errors %}
+        <script>
+          alert("{{ form.place.errors.as_text }}");
+      </script>
+        {% endif %}
+    </div>
+    <div class="input-group my-3">
+        <span class="input-group-text"> 카테고리  </span>
+        {{ form.category|add_class:"form-control" }}
+        {% if form.category.errors %}
+        <script>
+          alert("{{ form.category.errors.as_text }}");
+      </script>
+        {% endif %}
+    </div>
     <button type="submit" class="btn btn-primary">Save Changes</button>
 </form>
 {% endblock %}

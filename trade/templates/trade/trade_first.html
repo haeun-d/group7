@@ -26,6 +26,10 @@
             <a href="{% url 'trade:trade_detail' pk=post.pk %}" class="btn btn-primary">상세 보기</a>
           </div>
         </div>
+        {% empty %}
+        <div class="mt-5">
+        올라온 중고거래가 없습니다
+        </div>
     {% endfor %}
   </div>
 </div>

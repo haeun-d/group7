@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load widget_tweaks %}
 {% block title %}같이 밥 먹어요{% endblock %}
 
 {% block content %}
@@ -58,7 +59,15 @@
   <div>
   <form method="post" action="{% url 'community:comment' pk=post.pk %}">
       {% csrf_token %}
-      {{ comment_form.as_p }}
+      <div class="input-group my-3">
+     
+        {{ comment_form.text|add_class:"form-control" }}
+        {% if comment_form.text.errors %}
+        <script>
+          alert("{{ comment_form.text.errors.as_text }}");
+      </script>
+        {% endif %}
+    </div>
       <button type="submit">댓글 남기기</button>
   </form>
   </div>
