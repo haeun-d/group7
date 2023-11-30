@@ -4,7 +4,8 @@ from . import views
 app_name='trade'
 
 urlpatterns=[
-    path('',views.trade_first,name='trade'),
+    path('r/',views.trade_require,name='trade'),
+    path('f/',views.trade_finish, name='trade-finish'),
     path('create/', views.create, name='create'),
     path('<int:pk>/', views.trade_detail, name='trade_detail'),
     path('<int:pk>/edit/', views.edit_post, name='edit_post'),
