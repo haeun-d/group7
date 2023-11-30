@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load widget_tweaks %}
 {% block title %}Create a Post{% endblock %}
 {% block header %}Create a Post{% endblock %}
 
@@ -9,11 +10,51 @@
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
 
-        {{ delivery_form.title }}
-        {{ delivery_form.content }}
-        {{ delivery_form.head_image }}
-        {{ delivery_form.file_upload }}
-        {{ delivery_form.category_delivery }}
+        <div class="input-group my-3">
+            <span class="input-group-text"> 제목  </span>
+            {{ delivery_form.title|add_class:"form-control" }}
+            {% if delivery_form.title.errors %}
+            <script>
+              alert("{{ delivery_form.title.errors.as_text }}");
+          </script>
+            {% endif %}
+        </div>
+        <div class="input-group my-3">
+            <span class="input-group-text"> 내용  </span>
+            {{ delivery_form.content|add_class:"form-control" }}
+            {% if delivery_form.content.errors %}
+            <script>
+              alert("{{ delivery_form.content.errors.as_text }}");
+          </script>
+            {% endif %}
+        </div>
+        <div class="input-group my-3">
+            <span class="input-group-text"> 이미지 </span>
+            {{ delivery_form.head_image|add_class:"form-control" }}
+            {% if delivery_form.head_image.errors %}
+            <script>
+              alert("{{ delivery_form.head_image.errors.as_text }}");
+          </script>
+            {% endif %}
+        </div>
+        <div class="input-group my-3">
+            <span class="input-group-text"> 파일업로드  </span>
+            {{ delivery_form.file_upload|add_class:"form-control" }}
+            {% if delivery_form.file_upload.errors %}
+            <script>
+              alert("{{ delivery_form.place.errors.as_text }}");
+          </script>
+            {% endif %}
+        </div>
+        <div class="input-group my-3">
+            <span class="input-group-text"> 카테고리  </span>
+            {{ delivery_form.category_delivery|add_class:"form-control" }}
+            {% if delivery_form.category_delivery.errors %}
+            <script>
+              alert("{{ delivery_form.category_delivery.errors.as_text }}");
+          </script>
+            {% endif %}
+        </div>
 
         <button type="submit">Submit</button>
     </form>

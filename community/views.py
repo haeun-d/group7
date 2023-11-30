@@ -118,12 +118,13 @@ def edit_delivery(request, pk):
 
 def food_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
-    return render(request, 'community/food_detail.html', {'post': post})
+    comments=Comment.objects.filter(post=post)
+    return render(request, 'community/food_detail.html', {'post': post,'comments':comments})
 
 def delivery_detail(request,pk):
     post = get_object_or_404(Delivery, pk=pk)
-    return render(request, 'community/delivery_detail.html',{'post': post})
-
+    comments_delivery=CommentDelivery.objects.filter(post=post)
+    return render(request, 'community/delivery_detail.html',{'post': post,'comments_delivery':comments_delivery})
 '''
 def ott(request):
     return render(request, 'community/ott.html')

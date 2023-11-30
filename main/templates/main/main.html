@@ -1,39 +1,70 @@
 {% extends 'base.html' %}
 {% load static %}
+
 {% block title %}알차고{% endblock %}
-
+<styke>
+ 
 {% block content %}
-index
+<style>
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 
+  .animate__fadeIn {
+    animation: fadeIn 1s ease-in-out;
+  }
+
+  body {
+  background-color: #f8f9fa;
+}
+
+.navbar {
+  border-bottom: 1px solid #dee2e6;
+}
+
+.container {
+  background-color: #ffffff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+h2 {
+  color: #007bff;
+}
+
+img.rounded-circle {
+  border: 5px solid #007bff;
+}
+  </style>
+<div>
 {% if request.user.is_authenticated %}
-반갑습니다 {{request.user.username}}님<br>
-{% else %}
-로그인이 필요합니다
+로그인한 계정 :  {{request.user.username}}님<br>
+
 {% endif %}
-
-
-<header class="bg-primary text-white text-center py-5">
-  <img src="{% static 'img/Graham.png' %}" width="100px" height="200px">
-    <h1 class="display-4">About Us</h1>
-    <p class="lead">Learn more about our team and mission.</p>
-  </header>
-
-  <div class="container mt-5">
+</div>
+  <section class="container my-5">
     <div class="row">
-      <div class="col-lg-6">
-        <h2>Our Mission</h2>
-        <p>삼성 뛰어넘기</p>
+      <div class="col-lg-8">
+        <h2 class="mb-4 animate__animated animate__fadeIn">
+          
+          About Us - 알찬소
+          </h2>
+        <p class="lead animate__animated animate__fadeIn">알찬소는 소비자들이 지혜롭게 소비하는 데 도움을 주는 소비자 커뮤니티입니다. 우리는 다양한 제품과 서비스에 대한 정보를 공유하고, 생활 속에서 더 나은 선택을 할 수 있도록 돕기 위해 노력하고 있습니다.</p>
+        <p class="animate__animated animate__fadeIn">알찬한 정보 제공: 우리는 다양한 제품과 서비스에 대한 신뢰성 있는 정보를 제공하여 소비자들이 최고의 결정을 내릴 수 있도록 돕습니다.</p>
+        <p class="animate__animated animate__fadeIn">커뮤니티 협력: 소비자 간의 소통과 경험 공유를 장려하여 커뮤니티 구성원들끼리 함께 성장하는 플랫폼을 만들어나갑니다.</p>
+
+우리와 함께하세요<br>
+
+알찬소는 여러분과 함께 성장하고, 지혜롭게 소비하는 미래를 만들어가기 위해 노력합니다. 우리의 커뮤니티에 참여하여 소비의 새로운 지평을 열어보세요.
       </div>
-      <div class="col-lg-6">
-        <h2>Our Team</h2>
-        <ul class="list-group">
-          <li class="list-group-item">김은서 - 우</li>
-          <li class="list-group-item">여지원 - 린</li>
-          <li class="list-group-item">장다연 - 멋</li>
-          <li class="list-group-item">정하은 - 쟁</li>
-          <li class="list-group-item">한리안 - 이</li>
-        </ul>
+      <div class="col-lg-4">
+        <img src="your-company-image.jpg" alt="Company Image" class="img-fluid rounded-circle animate__animated animate__fadeIn">
       </div>
     </div>
-  </div>
+  </section>
 {% endblock %}
