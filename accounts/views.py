@@ -3,6 +3,8 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout
 from .forms import  SignUpForm
 from trade.models import *
+from community.models import  Delivery
+from community.models import Post as CommunityPost
 # 회원가입
 def signup_view(request):
     if request.method == "GET":
@@ -101,3 +103,12 @@ def leave_chat_room(request, room_id):
     chat_room.delete()
     return redirect('accounts:proceeding-chat')
 
+# 커뮤니티 음식
+def my_post_food(request):
+    posts=CommunityPost.objects.filter( author=request.user).order_by('-id')
+    return render(request, 'accounts/my_food.html',{'posts':posts})
+
+# 커뮤니티 ott
+def my_post_ott(request):
+    posts=Delivery.objects.filter( author=request.user).order_by('-id')
+    return render(request, 'accounts/my_ott.html',{'posts':posts})

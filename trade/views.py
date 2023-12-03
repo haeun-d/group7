@@ -4,9 +4,13 @@ from .models import Post, Chatting, ChatRoom, Review
 from .forms import PostForm, ReviewForm
 from users.models import User
 
-def trade_first(request):
-    posts = Post.objects.all().order_by('-created_at')
+def trade_require(request):
+    posts = Post.objects.filter(allowed_reviewer__isnull=True).order_by('-created_at')
     return render(request, 'trade/trade_first.html', {'posts': posts})
+
+def trade_finish(request):
+    posts = Post.objects.filter(allowed_reviewer__isnull=False).order_by('-created_at')
+    return render(request, 'trade/trade_finish.html', {'posts': posts})
 
 def create(request):
     if request.method == 'POST':
